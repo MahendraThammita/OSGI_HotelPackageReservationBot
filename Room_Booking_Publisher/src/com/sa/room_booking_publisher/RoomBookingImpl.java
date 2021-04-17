@@ -3,8 +3,11 @@
  */
 package com.sa.room_booking_publisher;
 
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.Scanner;
+import java.util.concurrent.Flow.Subscriber;
 
 /**
  * @author akila liyanage
@@ -16,6 +19,7 @@ public class RoomBookingImpl implements IRoomBooking{
 	private String username,checkinDate,checkoutDate;
 	private int headCount,nightsCount,childrenCount,packageNo;
 	Scanner scanner = new Scanner(System.in);  // Create a Scanner object
+	String dir = System.getProperty("user.dir");	//get the current working dir
 	
 	public RoomBookingImpl() {
 		// TODO Auto-generated constructor stub
@@ -107,7 +111,7 @@ public class RoomBookingImpl implements IRoomBooking{
 		// TODO Auto-generated method stub
 		//channing the methods
 		
-		new RoomBookingImpl().getUserName(username).headCount().getNightCount().getChildrenCount().checkInDate().checkOutDate();
+		new RoomBookingImpl().getUserName(username).headCount().getNightCount().getChildrenCount().checkInDate().checkOutDate().toCalculation();
 		
 	}
 
@@ -123,11 +127,9 @@ public class RoomBookingImpl implements IRoomBooking{
 		data.put("checkindate", this.checkinDate);
 		data.put("checkoutdate", this.checkoutDate);
 		data.put("package", Integer.toString(this.packageNo));
+		Activator.sub = true;
 		return data;
 	}
-
-
-	
 
 
 }

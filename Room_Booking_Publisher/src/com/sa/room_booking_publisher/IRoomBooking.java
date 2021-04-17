@@ -37,4 +37,5 @@ public interface IRoomBooking {
 	//exporting data to the calculations service
 	public HashMap<String, String> toCalculation();
 	
+	
 }
