@@ -33,4 +33,16 @@ public class RoomBookingImpl implements IRoomBooking{
 		
 	}
 
+	@Override
+	public void checkInDate(String date) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void checkOutDate(String date) {
+		// TODO Auto-generated method stub
+		
+	}
+
 }
