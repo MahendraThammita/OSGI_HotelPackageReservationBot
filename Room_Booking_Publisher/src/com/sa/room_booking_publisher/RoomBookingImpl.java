@@ -14,7 +14,7 @@ public class RoomBookingImpl implements IRoomBooking{
 	
 	//variables
 	private String username,checkinDate,checkoutDate;
-	private int headCount,nightsCount,childrenCount;
+	private int headCount,nightsCount,childrenCount,packageNo;
 	Scanner scanner = new Scanner(System.in);  // Create a Scanner object
 	
 	public RoomBookingImpl() {
@@ -74,6 +74,33 @@ public class RoomBookingImpl implements IRoomBooking{
 		
 		return this;
 	}
+	
+
+	@Override
+	public RoomBookingImpl packages() {
+		// TODO Auto-generated method stub
+		
+		System.out.println("Please select ur desired package =) ");
+		System.out.println("1.STANDARD");
+		System.out.println("\t + Luxury bath amenities");
+		System.out.println("\t + Rain shower");
+		System.out.println("\t + Lounge area");
+		System.out.println("");
+		System.out.println("2.DELUXE ");
+		System.out.println("\t + Luxury bath amenities");
+		System.out.println("\t + Private courtyard");
+		System.out.println("\t + Rain shower");
+		System.out.println("");
+		System.out.println("3.EXECUTIVE ");
+		System.out.println("\t + Luxury bath amenities");
+		System.out.println("\t + Deep-soaking bathtub & rain shower");
+		System.out.println("\t + Rain shower plus Sea view");
+		System.out.println("");
+		
+		System.out.println("Please enter the selected package number : ");
+	    this.packageNo = scanner.nextInt();  // Read user input
+		return this;
+	}
 
 	@Override
 	public void lifeCycleMethod(String username) {
@@ -95,31 +122,10 @@ public class RoomBookingImpl implements IRoomBooking{
 		data.put("childrencount:", Integer.toString(this.childrenCount));
 		data.put("checkindate", this.checkinDate);
 		data.put("checkoutdate", this.checkoutDate);
+		data.put("package", Integer.toString(this.packageNo));
 		return data;
 	}
 
-	@Override
-	public RoomBookingImpl packages() {
-		// TODO Auto-generated method stub
-		
-		System.out.println("Please select ur desired package =) ");
-		System.out.println("1.STANDARD");
-		System.out.println("\t + Luxury bath amenities");
-		System.out.println("\t + Rain shower");
-		System.out.println("\t + Lounge area");
-		System.out.println("");
-		System.out.println("2.DELUXE ");
-		System.out.println("\t + Luxury bath amenities");
-		System.out.println("\t + Private courtyard");
-		System.out.println("\t + Rain shower");
-		System.out.println("");
-		System.out.println("3.EXECUTIVE ");
-		System.out.println("\t + Luxury bath amenities");
-		System.out.println("\t + Deep-soaking bathtub & rain shower");
-		System.out.println("\t + Rain shower plus Sea view");
-		
-		return this;
-	}
 
 	
 
