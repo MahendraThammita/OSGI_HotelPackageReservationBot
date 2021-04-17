@@ -3,6 +3,7 @@
  */
 package com.sa.room_booking_publisher;
 
+import java.util.HashMap;
 import java.util.Scanner;
 
 /**
@@ -82,6 +83,16 @@ public class RoomBookingImpl implements IRoomBooking{
 		
 		new RoomBookingImpl().getUserName().headCount().getNightCount().getChildrenCount().checkInDate().checkOutDate();
 		
+	}
+
+	@Override
+	public HashMap<String, String> toCalculation() {
+		// TODO Auto-generated method stub
+		
+		HashMap<String, String> data = new HashMap<String, String>();
+		data.put("username", this.username);
+		data.put("headcount", Integer.toString(this.headCount));
+		return data;
 	}
 
 	
