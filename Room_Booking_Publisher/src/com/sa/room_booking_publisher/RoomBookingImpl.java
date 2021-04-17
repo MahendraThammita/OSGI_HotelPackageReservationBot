@@ -45,4 +45,10 @@ public class RoomBookingImpl implements IRoomBooking{
 		
 	}
 
+	@Override
+	public void lifeCycleMethod() {
+		// TODO Auto-generated method stub
+		
+	}
+
 }

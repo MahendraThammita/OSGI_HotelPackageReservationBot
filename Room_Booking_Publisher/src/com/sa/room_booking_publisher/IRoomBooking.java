@@ -26,4 +26,7 @@ public interface IRoomBooking {
 	//check out date
 	public void checkOutDate(String date);
 	
+	//lifecycle method
+	public void lifeCycleMethod();
+	
 }
