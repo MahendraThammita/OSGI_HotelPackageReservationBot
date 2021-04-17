@@ -102,6 +102,22 @@ public class RoomBookingImpl implements IRoomBooking{
 	public RoomBookingImpl packages() {
 		// TODO Auto-generated method stub
 		
+		System.out.println("Please select ur desired package =) ");
+		System.out.println("1.STANDARD");
+		System.out.println("\t + Luxury bath amenities");
+		System.out.println("\t + Rain shower");
+		System.out.println("\t + Lounge area");
+		System.out.println("");
+		System.out.println("2.DELUXE ");
+		System.out.println("\t + Luxury bath amenities");
+		System.out.println("\t + Private courtyard");
+		System.out.println("\t + Rain shower");
+		System.out.println("");
+		System.out.println("3.EXECUTIVE ");
+		System.out.println("\t + Luxury bath amenities");
+		System.out.println("\t + Deep-soaking bathtub & rain shower");
+		System.out.println("\t + Rain shower plus Sea view");
+		
 		return this;
 	}
 
