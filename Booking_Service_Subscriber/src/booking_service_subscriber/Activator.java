@@ -1,7 +1,5 @@
 package booking_service_subscriber;
 
-import com.sa.room_booking_publisher.IRoomBooking;
-import eventhall_booking_publisher.EventHallBook_Interface;
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
@@ -10,6 +8,11 @@ import java.util.Scanner;
 import org.osgi.framework.BundleActivator;
 import org.osgi.framework.BundleContext;
 import org.osgi.framework.ServiceReference;
+
+import com.sa.room_booking_publisher.IRoomBooking;
+
+import eventhall_booking_publisher.EventHallBook_Interface;
+
 
 
 
@@ -131,14 +134,10 @@ public void Login() {
 		else {
 			
 			if (option == 1) {
-				System.out.println("Fetching Packages..");
-				
-				//Fetch and display Packages -> Select package ->
-				
+				System.out.println("Room Reservation Selected");
 				serviceReference = context.getServiceReference(IRoomBooking.class.getName());
 				IRoomBooking iRoomBooking = (IRoomBooking)context.getService(serviceReference);
 				iRoomBooking.lifeCycleMethod(username);
-			
 			}
 			else if (option == 2) {
 				System.out.println("Event Hall Booking Selected");
