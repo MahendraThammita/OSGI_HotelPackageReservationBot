@@ -1,0 +1,10 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: Booking_Calculations_Publisher_Subscriber
+Bundle-SymbolicName: Booking_Calculations_Publisher_Subscriber
+Bundle-Version: 1.0.0.qualifier
+Bundle-Activator: booking_calculations_publisher_subscriber.CalculationsActivator
+Bundle-RequiredExecutionEnvironment: JavaSE-13
+Automatic-Module-Name: Booking_Calculations_Publisher_Subscriber
+Import-Package: org.osgi.framework;version="1.3.0"
+Bundle-ActivationPolicy: lazy
