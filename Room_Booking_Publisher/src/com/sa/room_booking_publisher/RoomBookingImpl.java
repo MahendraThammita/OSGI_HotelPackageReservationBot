@@ -24,11 +24,10 @@ public class RoomBookingImpl implements IRoomBooking{
 	}
 
 	@Override
-	public RoomBookingImpl getUserName() {
+	public RoomBookingImpl getUserName(String username) {
 		// TODO Auto-generated method stub
 		
-		System.out.println("Please enter the username : ");
-	    this.username = scanner.nextLine();  // Read user input
+	    this.username = username; // Read user input
 		return this;
 		
 	}
@@ -77,11 +76,11 @@ public class RoomBookingImpl implements IRoomBooking{
 	}
 
 	@Override
-	public void lifeCycleMethod() {
+	public void lifeCycleMethod(String username) {
 		// TODO Auto-generated method stub
 		//channing the methods
 		
-		new RoomBookingImpl().getUserName().headCount().getNightCount().getChildrenCount().checkInDate().checkOutDate();
+		new RoomBookingImpl().getUserName(username).headCount().getNightCount().getChildrenCount().checkInDate().checkOutDate();
 		
 	}
 
@@ -97,6 +96,13 @@ public class RoomBookingImpl implements IRoomBooking{
 		data.put("checkindate", this.checkinDate);
 		data.put("checkoutdate", this.checkoutDate);
 		return data;
+	}
+
+	@Override
+	public RoomBookingImpl packages() {
+		// TODO Auto-generated method stub
+		
+		return this;
 	}
 
 	
