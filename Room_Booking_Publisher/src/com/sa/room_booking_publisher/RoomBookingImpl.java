@@ -92,6 +92,10 @@ public class RoomBookingImpl implements IRoomBooking{
 		HashMap<String, String> data = new HashMap<String, String>();
 		data.put("username", this.username);
 		data.put("headcount", Integer.toString(this.headCount));
+		data.put("nightscount:", Integer.toString(this.nightsCount));
+		data.put("childrencount:", Integer.toString(this.childrenCount));
+		data.put("checkindate", this.checkinDate);
+		data.put("checkoutdate", this.checkoutDate);
 		return data;
 	}
 
