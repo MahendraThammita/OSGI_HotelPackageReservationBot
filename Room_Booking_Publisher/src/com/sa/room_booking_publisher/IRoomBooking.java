@@ -20,4 +20,10 @@ public interface IRoomBooking {
 	//get the number of head count that are below age 12
 	public void getChildrenCount(int count);
 	
+	//check in date
+	public void checkInDate(String date);
+	
+	//check out date
+	public void checkOutDate(String date);
+	
 }
