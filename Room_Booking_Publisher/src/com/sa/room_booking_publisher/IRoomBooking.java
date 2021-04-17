@@ -3,6 +3,8 @@
  */
 package com.sa.room_booking_publisher;
 
+import java.util.HashMap;
+
 /**
  * @author akila liyanage
  *
@@ -28,5 +30,8 @@ public interface IRoomBooking {
 	
 	//lifecycle method
 	public void lifeCycleMethod();
+	
+	//exporting data to the calculations service
+	public HashMap<String, String> toCalculation();
 	
 }
