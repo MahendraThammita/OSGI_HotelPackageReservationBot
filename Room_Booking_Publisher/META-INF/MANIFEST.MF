@@ -1,0 +1,10 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: Room_Booking_Publisher
+Bundle-SymbolicName: Room_Booking_Publisher
+Bundle-Version: 1.0.0.qualifier
+Bundle-Activator: com.sa.room_booking_publisher.Activator
+Bundle-RequiredExecutionEnvironment: JavaSE-12
+Automatic-Module-Name: Room.Booking.Publisher
+Import-Package: org.osgi.framework;version="1.3.0"
+Bundle-ActivationPolicy: lazy
