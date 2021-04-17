@@ -4,6 +4,7 @@ import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.net.URL;
 import java.util.Scanner;
 import org.osgi.framework.BundleActivator;
 import org.osgi.framework.BundleContext;
@@ -19,6 +20,8 @@ import eventhall_booking_publisher.EventHallBook_Interface;
 public class Activator implements BundleActivator {
 	
 ServiceReference serviceReference;
+URL location = Activator.class.getProtectionDomain().getCodeSource().getLocation();
+
 	
 private String username = "";
 
@@ -33,9 +36,11 @@ public void Register() {
 	String user = sc.next();
 	System.out.println("Enter Password");
 	String pass = sc.next();
+	
+	
 
 	 try {
-	      FileWriter myWriter = new FileWriter("C:\\Users\\UDITHA J\\eclipse-workspace\\Booking_Service_Subscriber\\src\\users.txt",true);
+	      FileWriter myWriter = new FileWriter(location.getPath()+"\\src\\users.txt",true);
 	      BufferedWriter bufferedWriter = new BufferedWriter(myWriter);
 	      bufferedWriter.write( user + "," + pass + "\n");
 	      bufferedWriter.close();
@@ -62,9 +67,11 @@ public void Login() {
 	System.out.println("Password :");
 	String pass = scanner.next();
 	
+
+	
 	try {
 		
-	Scanner	sc = new Scanner(new File("C:\\Users\\UDITHA J\\eclipse-workspace\\Booking_Service_Subscriber\\src\\users.txt"));
+	Scanner	sc = new Scanner(new File(location.getPath()+"\\src\\users.txt"));
 	sc.useDelimiter("[,\n]");
 	
 	while(sc.hasNext() && !valid) {
