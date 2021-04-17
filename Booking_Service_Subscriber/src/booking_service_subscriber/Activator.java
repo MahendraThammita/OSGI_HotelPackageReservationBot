@@ -1,5 +1,7 @@
 package booking_service_subscriber;
 
+import com.sa.room_booking_publisher.IRoomBooking;
+import eventhall_booking_publisher.EventHallBook_Interface;
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
@@ -7,9 +9,13 @@ import java.io.IOException;
 import java.util.Scanner;
 import org.osgi.framework.BundleActivator;
 import org.osgi.framework.BundleContext;
+import org.osgi.framework.ServiceReference;
+
 
 
 public class Activator implements BundleActivator {
+	
+ServiceReference serviceReference;
 	
 private String username = "";
 
@@ -87,7 +93,7 @@ public void Login() {
 	
 
 
-	public void start(BundleContext bundleContext) throws Exception {
+	public void start(BundleContext context) throws Exception {
 		
 		
 		System.out.println("1.Login \t 2.Signup");
@@ -125,10 +131,20 @@ public void Login() {
 		else {
 			
 			if (option == 1) {
-				System.out.println("Room Reservation Selected");
+				System.out.println("Fetching Packages..");
+				
+				//Fetch and display Packages -> Select package ->
+				
+				serviceReference = context.getServiceReference(IRoomBooking.class.getName());
+				IRoomBooking iRoomBooking = (IRoomBooking)context.getService(serviceReference);
+				iRoomBooking.lifeCycleMethod(username);
+			
 			}
 			else if (option == 2) {
 				System.out.println("Event Hall Booking Selected");
+				serviceReference = context.getServiceReference(EventHallBook_Interface.class.getName());
+				EventHallBook_Interface eventHallBook_Interface = (EventHallBook_Interface)context.getService(serviceReference);
+				eventHallBook_Interface.lifeCycleMethod();
 			}
 			
 		}
