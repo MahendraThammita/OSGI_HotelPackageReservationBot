@@ -6,4 +6,5 @@ Bundle-Version: 1.0.0.qualifier
 Bundle-Activator: eventhall_booking_publisher.Activator
 Bundle-RequiredExecutionEnvironment: JavaSE-1.8
 Import-Package: org.osgi.framework;version="1.3.0"
+Export-Package: eventhall_booking_publisher
 Bundle-ActivationPolicy: lazy

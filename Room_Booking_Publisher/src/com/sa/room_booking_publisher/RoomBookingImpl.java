@@ -24,8 +24,16 @@ public class RoomBookingImpl implements IRoomBooking{
 	public RoomBookingImpl() {
 		// TODO Auto-generated constructor stub
 		
-		System.out.println("Hi welcome to the Room Booking service, please proceed with the relevent information askig hereafter. Thank you");
+		
 	}
+	
+	public RoomBookingImpl(String name) {
+		// TODO Auto-generated constructor stub
+		
+		System.out.println("Hi " + name + " welcome to the Room Booking service, please proceed with the relevent information askig hereafter. Thank you");
+	}
+	
+	
 
 	@Override
 	public RoomBookingImpl getUserName(String username) {
@@ -111,7 +119,7 @@ public class RoomBookingImpl implements IRoomBooking{
 		// TODO Auto-generated method stub
 		//channing the methods
 		
-		new RoomBookingImpl().getUserName(username).headCount().getNightCount().getChildrenCount().checkInDate().checkOutDate().toCalculation();
+		new RoomBookingImpl(username).getUserName(username).packages().headCount().getNightCount().getChildrenCount().checkInDate().checkOutDate().toCalculation();
 		
 	}
 
