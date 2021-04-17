@@ -9,22 +9,22 @@ package com.sa.room_booking_publisher;
  */
 public interface IRoomBooking {
 	//get the user name form the subscriber
-	public void getUserName(String username);
+	public RoomBookingImpl getUserName();
 	
 	//get the head count
-	public void headCount(int count);
+	public RoomBookingImpl headCount();
 	
 	//get the number of nights
-	public void getNightCount(int count);
+	public RoomBookingImpl getNightCount();
 	
 	//get the number of head count that are below age 12
-	public void getChildrenCount(int count);
+	public RoomBookingImpl getChildrenCount();
 	
 	//check in date
-	public void checkInDate(String date);
+	public RoomBookingImpl checkInDate();
 	
 	//check out date
-	public void checkOutDate(String date);
+	public RoomBookingImpl checkOutDate();
 	
 	//lifecycle method
 	public void lifeCycleMethod();
