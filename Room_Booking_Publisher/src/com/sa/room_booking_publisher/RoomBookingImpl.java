@@ -8,47 +8,66 @@ package com.sa.room_booking_publisher;
  *
  */
 public class RoomBookingImpl implements IRoomBooking{
+	
+	public RoomBookingImpl() {
+		// TODO Auto-generated constructor stub
+		
+		System.out.println("Hi welcome to the Room Booking service, please proceed with the relevent information askig hereafter. Thank you");
+	}
 
 	@Override
-	public void getUserName(String username) {
+	public RoomBookingImpl getUserName() {
 		// TODO Auto-generated method stub
+		
+		return this;
 		
 	}
 
 	@Override
-	public void headCount(int count) {
+	public RoomBookingImpl headCount() {
 		// TODO Auto-generated method stub
 		
+		return this;
 	}
 
 	@Override
-	public void getNightCount(int count) {
+	public RoomBookingImpl getNightCount() {
 		// TODO Auto-generated method stub
 		
+		return this;
 	}
 
 	@Override
-	public void getChildrenCount(int count) {
+	public RoomBookingImpl getChildrenCount() {
 		// TODO Auto-generated method stub
 		
+		return this;
 	}
 
 	@Override
-	public void checkInDate(String date) {
+	public RoomBookingImpl checkInDate() {
 		// TODO Auto-generated method stub
 		
+		return this;
 	}
 
 	@Override
-	public void checkOutDate(String date) {
+	public RoomBookingImpl checkOutDate() {
 		// TODO Auto-generated method stub
 		
+		return this;
 	}
 
 	@Override
 	public void lifeCycleMethod() {
 		// TODO Auto-generated method stub
+		//channing the methods
+		
+		new RoomBookingImpl().getUserName().headCount().getChildrenCount().checkInDate().checkOutDate();
 		
 	}
+
+	
+
 
 }
