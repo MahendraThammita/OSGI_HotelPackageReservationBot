@@ -1,4 +1,4 @@
-package room_booking_publisher;
+package com.sa.room_booking_publisher;
 
 import org.osgi.framework.BundleActivator;
 import org.osgi.framework.BundleContext;
