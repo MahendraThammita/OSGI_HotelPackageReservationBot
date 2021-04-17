@@ -11,7 +11,7 @@ import java.util.HashMap;
  */
 public interface IRoomBooking {
 	//get the user name form the subscriber
-	public RoomBookingImpl getUserName();
+	public RoomBookingImpl getUserName(String username);
 	
 	//get the head count
 	public RoomBookingImpl headCount();
@@ -29,7 +29,10 @@ public interface IRoomBooking {
 	public RoomBookingImpl checkOutDate();
 	
 	//lifecycle method
-	public void lifeCycleMethod();
+	public void lifeCycleMethod(String username);
+	
+	//package details
+	public RoomBookingImpl packages();
 	
 	//exporting data to the calculations service
 	public HashMap<String, String> toCalculation();
