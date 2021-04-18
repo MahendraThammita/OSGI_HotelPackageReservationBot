@@ -13,6 +13,7 @@ public class Activator implements BundleActivator {
 
 	public void start(BundleContext context) throws Exception {
 		
+		System.out.println("user service started");
         UserHandler userHandler = new UserHandleraImpl();
 		
 		userhServiceRegistration = context.registerService(UserHandler.class.getName(),userHandler, null);
@@ -21,7 +22,8 @@ public class Activator implements BundleActivator {
 	}
 
 	public void stop(BundleContext bundleContext) throws Exception {
-		
+	
+		userhServiceRegistration.unregister();
 	}
 
 }
