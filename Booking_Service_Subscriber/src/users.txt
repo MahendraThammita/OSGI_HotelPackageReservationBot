@@ -1,1 +1,2 @@
-uj,pass
+uditha,password
+akila,akila
