@@ -19,6 +19,8 @@ public interface EventHallBook_Interface {
 	public EventHallBook_Impl getHeadCount();
 	
 	public EventHallBook_Impl getMeal();
+	
+	public EventHallBook_Impl getFunctionType();
 
 	public String getToday();
 	

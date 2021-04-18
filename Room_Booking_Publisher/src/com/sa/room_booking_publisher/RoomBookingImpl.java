@@ -9,6 +9,8 @@ import java.util.HashMap;
 import java.util.Scanner;
 import java.util.concurrent.Flow.Subscriber;
 
+import org.osgi.framework.FrameworkUtil;
+
 /**
  * @author akila liyanage
  *
@@ -16,16 +18,25 @@ import java.util.concurrent.Flow.Subscriber;
 public class RoomBookingImpl implements IRoomBooking{
 	
 	//variables
-	private String username,checkinDate,checkoutDate;
+	private String username,checkinDate,checkoutDate,coupen;
 	private int headCount,nightsCount,childrenCount,packageNo;
 	Scanner scanner = new Scanner(System.in);  // Create a Scanner object
 	String dir = System.getProperty("user.dir");	//get the current working dir
+	public static HashMap<String, String> data = new HashMap<String, String>();
 	
 	public RoomBookingImpl() {
 		// TODO Auto-generated constructor stub
 		
-		System.out.println("Hi welcome to the Room Booking service, please proceed with the relevent information askig hereafter. Thank you");
+		
 	}
+	
+	public RoomBookingImpl(String name) {
+		// TODO Auto-generated constructor stub
+		
+		System.out.println("Hi " + name + " welcome to the Room Booking service, please proceed with the relevent information askig hereafter. Thank you. \n");
+	}
+	
+	
 
 	@Override
 	public RoomBookingImpl getUserName(String username) {
@@ -40,7 +51,7 @@ public class RoomBookingImpl implements IRoomBooking{
 	public RoomBookingImpl headCount() {
 		// TODO Auto-generated method stub
 		
-		System.out.println("Please enter the head count : ");
+		System.out.print("Please enter the head count : ");
 	    this.headCount = scanner.nextInt();  // Read user input
 		return this;
 	}
@@ -49,7 +60,7 @@ public class RoomBookingImpl implements IRoomBooking{
 	public RoomBookingImpl getNightCount() {
 		// TODO Auto-generated method stub
 		
-		System.out.println("Please enter the night count : ");
+		System.out.print("Please enter the night count : ");
 	    this.nightsCount = scanner.nextInt();  // Read user input
 		return this;
 	}
@@ -58,7 +69,7 @@ public class RoomBookingImpl implements IRoomBooking{
 	public RoomBookingImpl getChildrenCount() {
 		// TODO Auto-generated method stub
 		
-		System.out.println("Please enter the number of children : ");
+		System.out.print("Please enter the number of children : ");
 	    this.childrenCount = scanner.nextInt();  // Read user input
 		return this;
 	}
@@ -67,8 +78,8 @@ public class RoomBookingImpl implements IRoomBooking{
 	public RoomBookingImpl checkInDate() {
 		// TODO Auto-generated method stub
 		
-		System.out.println("Please enter the check in date : ");
-	    this.checkinDate = scanner.nextLine();  // Read user input
+		System.out.print("Please enter the check in date (dd-MM-yyyy) : ");
+	    this.checkinDate = scanner.next();  // Read user input
 		return this;
 	}
 
@@ -105,13 +116,38 @@ public class RoomBookingImpl implements IRoomBooking{
 	    this.packageNo = scanner.nextInt();  // Read user input
 		return this;
 	}
+	
+	@Override
+	public RoomBookingImpl coupenDet() {
+		// TODO Auto-generated method stub
+		
+		System.out.print("Do ypu have any coupen codes available with you? (y/n) : ");
+	    this.coupen = scanner.next();  // Read user input
+	    while(true){
+	    	if(coupen.equals("y")) {
+		    	System.out.print("Please enter the coupen code : ");
+		    	this.coupen = scanner.next();
+		    	break;
+		    }else if(this.coupen.equals("n")) {
+		    	this.coupen = null;
+		    	break;
+		    }else {
+		    	System.out.println("Invalid input, please enter y/n : ");
+		    }
+	    }
+	    
+	    return this;
+	}
 
 	@Override
 	public void lifeCycleMethod(String username) {
 		// TODO Auto-generated method stub
 		//channing the methods
 		
-		new RoomBookingImpl().getUserName(username).headCount().getNightCount().getChildrenCount().checkInDate().checkOutDate().toCalculation();
+		RoomBookingImpl bookingImpl = new RoomBookingImpl(username).getUserName(username).packages().headCount().getNightCount().getChildrenCount().coupenDet();
+		bookingImpl.checkInDate();
+		bookingImpl.toCalculation();
+		
 		
 	}
 
@@ -119,7 +155,9 @@ public class RoomBookingImpl implements IRoomBooking{
 	public HashMap<String, String> toCalculation() {
 		// TODO Auto-generated method stub
 		
-		HashMap<String, String> data = new HashMap<String, String>();
+		System.out.println("Sending data to the calculation service");
+		
+		
 		data.put("username", this.username);
 		data.put("headcount", Integer.toString(this.headCount));
 		data.put("nightscount:", Integer.toString(this.nightsCount));
@@ -127,9 +165,13 @@ public class RoomBookingImpl implements IRoomBooking{
 		data.put("checkindate", this.checkinDate);
 		data.put("checkoutdate", this.checkoutDate);
 		data.put("package", Integer.toString(this.packageNo));
+		data.put("coupen", this.coupen);
+		Activator.callCalculationService();
 		Activator.sub = true;
 		return data;
 	}
+
+
 
 
 }
