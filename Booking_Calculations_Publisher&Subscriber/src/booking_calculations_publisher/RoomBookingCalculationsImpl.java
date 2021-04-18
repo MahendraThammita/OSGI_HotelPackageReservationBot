@@ -26,8 +26,9 @@ public class RoomBookingCalculationsImpl implements IRoomBookingCalculations {
 	DateTimeFormatter converter = DateTimeFormatter.ofPattern("dd-MM-YYYY");
 	@Override
 	public HashMap<String, String> CalculateFinalBill(HashMap<String, String> BookingInfo) {
-
 		
+		System.out.println("akila " + BookingInfo);
+
 		String username = BookingInfo.get("username");
 		int headcount = Integer.parseInt(BookingInfo.get("headcount"));
 		int nightscount = Integer.parseInt(BookingInfo.get("nightscount"));
@@ -67,6 +68,7 @@ public class RoomBookingCalculationsImpl implements IRoomBookingCalculations {
 		BookingInfo.put("seasonalDiscount", Double.toString(seasonalDiscount));
 		BookingInfo.put("totalDiscount", Double.toString(totalDiscount));
 		BookingInfo.put("grossTotal", Double.toString(grossTotal));
+		
 		
 		return BookingInfo;
 	}

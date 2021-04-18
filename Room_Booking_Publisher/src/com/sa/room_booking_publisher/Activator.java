@@ -14,6 +14,7 @@ public class Activator implements BundleActivator {
 	ServiceRegistration publishServiceRegistration;
 	static ServiceReference serviceReference;
 	static BundleContext contextNew;
+	private static HashMap<String, String> calData;
 
 
 	public void start(BundleContext context) throws Exception {
@@ -53,13 +54,12 @@ public class Activator implements BundleActivator {
 		try {
 			System.out.println(RoomBookingImpl.data);
 			serviceReference = contextNew.getServiceReference(IRoomBookingCalculations.class.getName());
-			@SuppressWarnings("unchecked")
 			IRoomBookingCalculations iRoomBookingCalculations = (IRoomBookingCalculations) contextNew.getService(serviceReference);
-			iRoomBookingCalculations.CalculateFinalBill(RoomBookingImpl.data);
+			calData =  iRoomBookingCalculations.CalculateFinalBill(RoomBookingImpl.data);
 		}catch(Exception ex) {
 			System.out.println(ex);
 		}
-		return null;
+		return calData;
 		
 	}
 

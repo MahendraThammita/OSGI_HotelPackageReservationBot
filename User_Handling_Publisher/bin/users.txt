@@ -1,7 +1,5 @@
 uj,pass
-<<<<<<< HEAD
 user,pass
 uditha,pass
-=======
->>>>>>> 317e252f5a23af989c3b345982fd50da79ad7d5e
 mahen,pass
+akila,akila

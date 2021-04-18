@@ -5,6 +5,10 @@ package com.sa.room_booking_publisher;
 
 import java.io.FileWriter;
 import java.io.IOException;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Scanner;
 import java.util.concurrent.Flow.Subscriber;
@@ -20,9 +24,12 @@ public class RoomBookingImpl implements IRoomBooking{
 	//variables
 	private String username,checkinDate,checkoutDate,coupen;
 	private int headCount,nightsCount,childrenCount,packageNo;
+	private Date checkOutDate;
 	Scanner scanner = new Scanner(System.in);  // Create a Scanner object
 	String dir = System.getProperty("user.dir");	//get the current working dir
 	public static HashMap<String, String> data = new HashMap<String, String>();
+	public HashMap<String, String> finalBill;
+	SimpleDateFormat checkInDate;
 	
 	public RoomBookingImpl() {
 		// TODO Auto-generated constructor stub
@@ -78,14 +85,25 @@ public class RoomBookingImpl implements IRoomBooking{
 	public RoomBookingImpl checkInDate() {
 		// TODO Auto-generated method stub
 		
-		System.out.print("Please enter the check in date (dd-MM-yyyy) : ");
+		System.out.print("Please enter the check in date (dd/MM/yyyy) : ");
 	    this.checkinDate = scanner.next();  // Read user input
+	    checkInDate = new SimpleDateFormat("dd/MM/yyyy");  
 		return this;
 	}
 
 	@Override
 	public RoomBookingImpl checkOutDate() {
 		// TODO Auto-generated method stub
+		
+		Calendar c = Calendar.getInstance();
+		try {
+			c.setTime(checkInDate.parse(checkinDate));
+		} catch (ParseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		c.add(Calendar.DATE, this.nightsCount);  // number of days to add
+		checkoutDate = checkInDate.format(c.getTime());  // dt is now the new date
 		
 		return this;
 	}
@@ -146,6 +164,7 @@ public class RoomBookingImpl implements IRoomBooking{
 		
 		RoomBookingImpl bookingImpl = new RoomBookingImpl(username).getUserName(username).packages().headCount().getNightCount().getChildrenCount().coupenDet();
 		bookingImpl.checkInDate();
+		bookingImpl.checkOutDate();
 		bookingImpl.toCalculation();
 		
 		
@@ -166,7 +185,8 @@ public class RoomBookingImpl implements IRoomBooking{
 		data.put("checkoutdate", this.checkoutDate);
 		data.put("package", Integer.toString(this.packageNo));
 		data.put("coupen", this.coupen);
-		Activator.callCalculationService();
+		finalBill = Activator.callCalculationService();
+		System.out.println(finalBill);
 		Activator.sub = true;
 		return data;
 	}
