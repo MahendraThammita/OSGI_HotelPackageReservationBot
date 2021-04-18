@@ -1,5 +1,8 @@
 package booking_calculations_publisher;
 
+import java.io.BufferedWriter;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.net.URL;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
@@ -65,7 +68,36 @@ public class EventHallBookingCalculationsImpl implements IEventHallBookingCalcul
 	@Override
 	public String ConfirmHallBooking(HashMap<String, String> BookingInfo) {
 		
-		return null;
+		
+		
+		String username = BookingInfo.get("name");
+		int id = Integer.parseInt(BookingInfo.get("id"));
+		int headcount = Integer.parseInt(BookingInfo.get("headCount"));
+		int meal = Integer.parseInt(BookingInfo.get("meal"));
+		int functionType = Integer.parseInt(BookingInfo.get("functionType"));
+		LocalDate eventDate = LocalDate.parse(BookingInfo.get("eventDate") , converter);
+		double totalPrice = Double.parseDouble(BookingInfo.get("totalPrice") );
+		double regularDiscount = Double.parseDouble(BookingInfo.get("regularDiscount") );
+		double seasonalDiscount = Double.parseDouble(BookingInfo.get("seasonalDiscount") );
+		double Totaldiscount = Double.parseDouble(BookingInfo.get("Totaldiscount") );
+		double FinalAmmount = Double.parseDouble(BookingInfo.get("FinalAmmount") );
+		boolean Confirmation = Boolean.parseBoolean(BookingInfo.get("Confirmation") );
+		
+		if(Confirmation) {
+			try {
+				FileWriter bookingWriter = new FileWriter(workspace.getPath() + "\\src\\EventBookings.txt" , true);
+				BufferedWriter bufferedWriter = new BufferedWriter(bookingWriter);
+				bufferedWriter.write(username + "\t" + id + "\t" + headcount + "\t" + meal + "\t" + functionType + "\t" + eventDate + "\t" + totalPrice + "\t" + regularDiscount+ "\t" + seasonalDiscount+ "\t" + Totaldiscount + "\t" + FinalAmmount+ "\n");
+				bufferedWriter.close();
+				return "Event Booking Saved Successfully.";
+			} catch (IOException e) {
+				e.printStackTrace();
+				return "Error occoured in writing file.";
+			}
+			
+		}
+		else
+			return "Error in Saving Booking.";
 	}
 
 	@Override
