@@ -22,13 +22,13 @@ import org.osgi.framework.FrameworkUtil;
 public class RoomBookingImpl implements IRoomBooking{
 	
 	//variables
-	private String username,checkinDate,checkoutDate,coupen;
+	private String username,checkinDate,checkoutDate,coupen,confirm;
 	private int headCount,nightsCount,childrenCount,packageNo;
 	private Date checkOutDate;
 	Scanner scanner = new Scanner(System.in);  // Create a Scanner object
 	String dir = System.getProperty("user.dir");	//get the current working dir
 	public static HashMap<String, String> data = new HashMap<String, String>();
-	public HashMap<String, String> finalBill;
+	public static HashMap<String, String> finalBill;
 	SimpleDateFormat checkInDate;
 	
 	public RoomBookingImpl() {
@@ -113,24 +113,33 @@ public class RoomBookingImpl implements IRoomBooking{
 	public RoomBookingImpl packages() {
 		// TODO Auto-generated method stub
 		
-		System.out.println("Please select ur desired package =) ");
-		System.out.println("1.STANDARD");
-		System.out.println("\t + Luxury bath amenities");
-		System.out.println("\t + Rain shower");
-		System.out.println("\t + Lounge area");
-		System.out.println("");
-		System.out.println("2.DELUXE ");
-		System.out.println("\t + Luxury bath amenities");
-		System.out.println("\t + Private courtyard");
-		System.out.println("\t + Rain shower");
-		System.out.println("");
-		System.out.println("3.EXECUTIVE ");
-		System.out.println("\t + Luxury bath amenities");
-		System.out.println("\t + Deep-soaking bathtub & rain shower");
-		System.out.println("\t + Rain shower plus Sea view");
-		System.out.println("");
+		ITableView packageTable = new TableViewImpl();
+		packageTable.setShowVerticalLines(true);
+		packageTable.setHeaders("No","Package Name","Package Details");
+		packageTable.addRow("1","STANDARD","Luxury bath amenities | Rain shower | Lounge area");
+		packageTable.addRow("2","DELUXE","Luxury bath amenities |  Private courtyard | Rain shower");
+		packageTable.addRow("3","EXECUTIVE","Luxury bath amenities | Deep-soaking bathtub & rain shower | Rain shower plus Sea view");
 		
-		System.out.println("Please enter the selected package number : ");
+		packageTable.print();
+		
+//		System.out.println("Please select ur desired package =) ");
+//		System.out.println("1.STANDARD");
+//		System.out.println("\t + Luxury bath amenities");
+//		System.out.println("\t + Rain shower");
+//		System.out.println("\t + Lounge area");
+//		System.out.println("");
+//		System.out.println("2.DELUXE ");
+//		System.out.println("\t + Luxury bath amenities");
+//		System.out.println("\t + Private courtyard");
+//		System.out.println("\t + Rain shower");
+//		System.out.println("");
+//		System.out.println("3.EXECUTIVE ");
+//		System.out.println("\t + Luxury bath amenities");
+//		System.out.println("\t + Deep-soaking bathtub & rain shower");
+//		System.out.println("\t + Rain shower plus Sea view");
+//		System.out.println("");
+		
+		System.out.print("Please enter the selected package number : ");
 	    this.packageNo = scanner.nextInt();  // Read user input
 		return this;
 	}
@@ -166,6 +175,7 @@ public class RoomBookingImpl implements IRoomBooking{
 		bookingImpl.checkInDate();
 		bookingImpl.checkOutDate();
 		bookingImpl.toCalculation();
+		bookingImpl.getConfirmation();
 		
 		
 	}
@@ -186,9 +196,51 @@ public class RoomBookingImpl implements IRoomBooking{
 		data.put("package", Integer.toString(this.packageNo));
 		data.put("CouponNo", this.coupen);
 		finalBill = Activator.callCalculationService();
-		//System.out.println(finalBill);
 		Activator.sub = true;
 		return data;
+	}
+
+	@Override
+	public void getConfirmation() {
+		// TODO Auto-generated method stub
+		
+		ITableView bill = new TableViewImpl();
+		
+		System.out.println("\n");
+		System.out.println("---------- Your Final bill summary\n");
+		bill.setShowVerticalLines(true);
+		bill.setHeaders("Feature","Price/Number");
+		bill.addRow("User Name",finalBill.get("username"));
+		bill.addRow("Check In Date",finalBill.get("checkindate"));
+		bill.addRow("Chek Out Date",finalBill.get("checkoutdate"));
+		bill.addRow("Head Count",finalBill.get("headcount"));
+		bill.addRow("No of Children",finalBill.get("childrencount"));
+		bill.addRow("Selected Package",finalBill.get("package"));
+		bill.addRow("Seasonal Discount",finalBill.get("seasonalDiscount"));
+		bill.addRow("Regular Discount",finalBill.get("regularDiscount"));
+		bill.addRow("Coupen Discount",finalBill.get("CouponDiscount"));
+		bill.addRow("Total Discount",finalBill.get("totalDiscount"));
+		bill.addRow("FINAL PRICE",finalBill.get("grossTotal"));
+		bill.print();
+		
+		System.out.print("Do you want to proceed with the booking? (y/n) : ");
+		confirm = scanner.next();
+		
+		while(true) {
+			if(confirm.equals("y")) {
+				finalBill.put("Confirmation", "true");
+				break;
+			}else if(confirm.equals("n")) {
+				finalBill.put("Confirmation", "false");
+				break;
+			}else {
+				System.out.print("Invalid input please enter y/n");
+				confirm = scanner.next();
+			}
+		}
+		
+		System.out.println(Activator.confirmBooking() + "Thank you for using Room Booking Service =) ");
+
 	}
 
 
