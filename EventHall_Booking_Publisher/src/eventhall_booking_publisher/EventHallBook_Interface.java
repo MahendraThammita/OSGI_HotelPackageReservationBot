@@ -28,6 +28,8 @@ public interface EventHallBook_Interface {
 	
 	public void lifeCycleMethod();
 	
+	public void getConfirmation();
+	
 	public HashMap<String, String> toCalculation();
 	
 }
