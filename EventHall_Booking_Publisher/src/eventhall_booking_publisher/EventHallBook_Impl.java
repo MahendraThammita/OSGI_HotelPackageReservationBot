@@ -135,9 +135,28 @@ public class EventHallBook_Impl implements EventHallBook_Interface{
 		
 		System.out.println("Please select ur Event type =) ");
 		System.out.println("1.Party");
+		System.out.println("\t + Lunch or Dinner");
+		System.out.println("\t + Welcome Drink");
+		System.out.println("\t + Can Choose one between Open area and Banquet hall");
+		System.out.println("");
 		System.out.println("2.Wedding");
+		System.out.println("\t + Lunch or Dinner");
+		System.out.println("\t + Welcome Drink");
+		System.out.println("\t + Can be aranged the flower themes based on your selection");
+		System.out.println("\t + Open buffet");
+		System.out.println("");
 		System.out.println("3.Workshops");
+		System.out.println("\t + Lunch or Dinner");
+		System.out.println("\t + Welcome Drink");
+		System.out.println("\t + Can Choose one between Open area and Banquet hall");
+		System.out.println("\t + Can be aranged the projectors and stuff");
+		System.out.println("");
 		System.out.println("4.Conferences");
+		System.out.println("\t + Lunch or Dinner");
+		System.out.println("\t + Welcome Drink");
+		System.out.println("\t + Can Choose one between Open area and Banquet hall");
+		System.out.println("\t + Can be aranged the projectors and stuff");
+		System.out.println("");
 		System.out.println("5.Other");
 		
 		System.out.println("Please enter the selected event number : ");
