@@ -8,8 +8,8 @@ import java.util.Scanner;
 
 public class EventHallBook_Impl implements EventHallBook_Interface{
 	
-	private String name, email, meal, eventDate;
-	private int phNo, idNum, headCount;
+	private String name, email, eventDate;
+	private int phNo, idNum, headCount , functionType, meal;
 	
 	Scanner sc= new Scanner(System.in);
 	
@@ -72,10 +72,15 @@ public class EventHallBook_Impl implements EventHallBook_Interface{
 	
 	@Override
 	public EventHallBook_Impl getMeal() {
-		// TODO Auto-generated method stub
-		System.out.println("You can choose your meal that you are expecting to have in your function (Lunch/Evening Tea/Dinner)");
-		System.out.println("Enter your meal: ");
-		meal = sc.nextLine();
+		
+		System.out.println("Please select ur desired meal package =) ");
+		System.out.println("1.Package 1");
+		System.out.println("2.Package 2");
+		System.out.println("3.Package 3");
+		System.out.println("");
+		
+		System.out.println("Please enter the selected event number : ");
+		meal = sc.nextInt();
 		return this;
 	}
 	
@@ -118,10 +123,26 @@ public class EventHallBook_Impl implements EventHallBook_Interface{
 		hallBookingData.put("phone:", Integer.toString(this.phNo));
 		hallBookingData.put("eventDate", this.eventDate);
 		hallBookingData.put("headCount", Integer.toString(this.headCount));
-		hallBookingData.put("meal", this.meal);
+		hallBookingData.put("meal", Integer.toString(this.meal));
+		hallBookingData.put("functionType", Integer.toString(this.functionType));
 		
 		return hallBookingData;
 		
+	}
+
+	@Override
+	public EventHallBook_Impl getFunctionType() {
+		
+		System.out.println("Please select ur Event type =) ");
+		System.out.println("1.Party");
+		System.out.println("2.Wedding");
+		System.out.println("3.Workshops");
+		System.out.println("4.Conferences");
+		System.out.println("5.Other");
+		
+		System.out.println("Please enter the selected event number : ");
+		functionType = sc.nextInt();
+		return this;
 	}
 	
 
