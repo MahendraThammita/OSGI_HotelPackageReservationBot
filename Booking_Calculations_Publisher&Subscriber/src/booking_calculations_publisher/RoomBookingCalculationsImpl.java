@@ -1,9 +1,12 @@
 package booking_calculations_publisher;
 
 
+import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.net.URL;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
@@ -19,10 +22,11 @@ public class RoomBookingCalculationsImpl implements IRoomBookingCalculations {
 	double DELUXE_UnitPrice = 6000.00;
 	double EXECUTIVE_UnitPrice = 10000.00;
 	URL workspace = RoomBookingCalculationsImpl.class.getProtectionDomain().getCodeSource().getLocation();
+	
+	DateTimeFormatter converter = DateTimeFormatter.ofPattern("dd-MM-YYYY");
 	@Override
 	public HashMap<String, String> CalculateFinalBill(HashMap<String, String> BookingInfo) {
 
-		DateTimeFormatter converter = DateTimeFormatter.ofPattern("dd-MM-YYYY");
 		
 		String username = BookingInfo.get("username");
 		int headcount = Integer.parseInt(BookingInfo.get("headcount"));
@@ -134,8 +138,35 @@ public class RoomBookingCalculationsImpl implements IRoomBookingCalculations {
 
 	@Override
 	public String ConfirmRoomBooking(HashMap<String, String> BookingInfo) {
-		// TODO Auto-generated method stub
-		return null;
+		
+		String username = BookingInfo.get("username");
+		int headcount = Integer.parseInt(BookingInfo.get("headcount"));
+		int nightscount = Integer.parseInt(BookingInfo.get("nightscount"));
+		int childrencount = Integer.parseInt(BookingInfo.get("childrencount"));
+		LocalDate checkindate = LocalDate.parse(BookingInfo.get("checkindate") , converter);
+		LocalDate checkoutdate = LocalDate.parse(BookingInfo.get("checkoutdate") , converter);
+		int pack = Integer.parseInt(BookingInfo.get("package"));
+		double CouponDiscount = Double.parseDouble(BookingInfo.get("CouponDiscount") );
+		double regularDiscount = Double.parseDouble(BookingInfo.get("regularDiscount") );
+		double seasonalDiscount = Double.parseDouble(BookingInfo.get("seasonalDiscount") );
+		double totalDiscount = Double.parseDouble(BookingInfo.get("totalDiscount") );
+		double grossTotal = Double.parseDouble(BookingInfo.get("grossTotal") );
+		boolean Confirmation = Boolean.parseBoolean(BookingInfo.get("Confirmation") );
+		if(Confirmation) {
+			try {
+				FileWriter bookingWriter = new FileWriter(workspace.getPath() + "\\src\\RoomBookings.txt" , true);
+				BufferedWriter bufferedWriter = new BufferedWriter(bookingWriter);
+				bufferedWriter.write(username + "\t" + pack + "\t" + headcount + "\t" + nightscount + "\t" + childrencount + "\t" + checkindate + "\t" + checkoutdate + "\t" + CouponDiscount+ "\t" + regularDiscount+ "\t" + seasonalDiscount+ "\t" + totalDiscount+ "\t" + grossTotal + "\n");
+				bufferedWriter.close();
+				return "Rooms Booking Saved Successfully.";
+			} catch (IOException e) {
+				e.printStackTrace();
+				return "Error occoured in writing file.";
+			}
+			
+		}
+		else
+			return "Error in Saving Booking.";
 	}
 
 	
