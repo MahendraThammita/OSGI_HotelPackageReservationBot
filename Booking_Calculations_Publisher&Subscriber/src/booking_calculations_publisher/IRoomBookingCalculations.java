@@ -14,5 +14,4 @@ public interface IRoomBookingCalculations {
 	public double SeasonalDiscount(int packageNo , LocalDate checkinDate , double netTotal); 
 	
 	public String ConfirmRoomBooking(HashMap<String, String> BookingInfo);
-	
 }

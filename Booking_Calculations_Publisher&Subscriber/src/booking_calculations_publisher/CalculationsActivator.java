@@ -3,24 +3,32 @@ package booking_calculations_publisher;
 import org.osgi.framework.BundleActivator;
 import org.osgi.framework.BundleContext;
 import org.osgi.framework.ServiceReference;
+import org.osgi.framework.ServiceRegistration;
+
+import servicepublisher.ServicePublish;
+import servicepublisher.ServicePublishImpl;
 
 
 
 public class CalculationsActivator implements BundleActivator {
 
-	ServiceReference roomBundleReference;
-	ServiceReference hallBundleReference;
+	ServiceRegistration roomBundleRegistration;
+	ServiceRegistration hallBundleRegistration;
 
 	public void start(BundleContext context) throws Exception {
-		System.out.println("Publisher Start");
-		roomBundleReference = context.getServiceReference(IRoomBookingCalculations.class.getName());
-		//roomBundleReference = context.getServiceReference(IRoomBookingCalculations.class.getName());
-		IRoomBookingCalculations RoomService = (IRoomBookingCalculations)context.getService(roomBundleReference);
+		
+		//Room Services Registration
+		IRoomBookingCalculations RoomService = new RoomBookingCalculationsImpl();
+		roomBundleRegistration = context.registerService(IRoomBookingCalculations.class.getName(), RoomService, null);
+		
+		//Event Hall Services Registration
+		IEventHallBookingCalculations HallService = new EventHallBookingCalculationsImpl();
+		hallBundleRegistration = context.registerService(IRoomBookingCalculations.class.getName(), HallService, null);
 	}
 
 	public void stop(BundleContext context) throws Exception {
-		context.ungetService(roomBundleReference);
-		context.ungetService(hallBundleReference);
+		roomBundleRegistration.unregister();
+		hallBundleRegistration.unregister();
 	}
 
 }
