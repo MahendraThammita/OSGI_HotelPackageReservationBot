@@ -15,6 +15,7 @@ public class Activator implements BundleActivator {
 	static ServiceReference serviceReference;
 	static BundleContext contextNew;
 	private static HashMap<String, String> calData;
+	public static String confirmationMsg;
 
 
 	public void start(BundleContext context) throws Exception {
@@ -52,15 +53,27 @@ public class Activator implements BundleActivator {
 
 		System.out.println("start subscribing calculation module");
 		try {
-			System.out.println(RoomBookingImpl.data);
 			serviceReference = contextNew.getServiceReference(IRoomBookingCalculations.class.getName());
 			IRoomBookingCalculations iRoomBookingCalculations = (IRoomBookingCalculations) contextNew.getService(serviceReference);
 			calData =  iRoomBookingCalculations.CalculateFinalBill(RoomBookingImpl.data);
-			System.out.println("final bill" + calData);
 		}catch(Exception ex) {
 			System.out.println(ex);
 		}
 		return calData;
+		
+	}
+	
+	public static String confirmBooking(){
+
+		System.out.println("Sending data to the Calculation service to confirm the booking!!!");
+		try {
+			serviceReference = contextNew.getServiceReference(IRoomBookingCalculations.class.getName());
+			IRoomBookingCalculations iRoomBookingCalculations = (IRoomBookingCalculations) contextNew.getService(serviceReference);
+			confirmationMsg =  iRoomBookingCalculations.ConfirmRoomBooking(RoomBookingImpl.finalBill);
+		}catch(Exception ex) {
+			System.out.println(ex);
+		}
+		return confirmationMsg;
 		
 	}
 

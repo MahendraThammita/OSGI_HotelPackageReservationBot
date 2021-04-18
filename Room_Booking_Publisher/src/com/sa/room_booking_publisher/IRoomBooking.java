@@ -40,5 +40,8 @@ public interface IRoomBooking {
 	//exporting data to the calculations service
 	public HashMap<String, String> toCalculation();
 	
+	//display final bill and get confirmation
+	public void getConfirmation();
+	
 	
 }
