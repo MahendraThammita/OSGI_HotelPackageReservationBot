@@ -1,0 +1,11 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: User_Handling_Publisher
+Bundle-SymbolicName: User_Handling_Publisher
+Bundle-Version: 1.0.0.qualifier
+Bundle-Activator: user_handling_publisher.Activator
+Bundle-RequiredExecutionEnvironment: JavaSE-15
+Automatic-Module-Name: User.Handling.Publisher
+Import-Package: org.osgi.framework;version="1.3.0"
+Bundle-ActivationPolicy: lazy
+Export-Package: user_handling_publisher
