@@ -9,6 +9,8 @@ import java.util.HashMap;
 import java.util.Scanner;
 import java.util.concurrent.Flow.Subscriber;
 
+import org.osgi.framework.FrameworkUtil;
+
 /**
  * @author akila liyanage
  *
@@ -20,6 +22,7 @@ public class RoomBookingImpl implements IRoomBooking{
 	private int headCount,nightsCount,childrenCount,packageNo;
 	Scanner scanner = new Scanner(System.in);  // Create a Scanner object
 	String dir = System.getProperty("user.dir");	//get the current working dir
+	public static HashMap<String, String> data = new HashMap<String, String>();
 	
 	public RoomBookingImpl() {
 		// TODO Auto-generated constructor stub
@@ -132,7 +135,7 @@ public class RoomBookingImpl implements IRoomBooking{
 		
 		System.out.println("Sending data to the calculation service");
 		
-		HashMap<String, String> data = new HashMap<String, String>();
+		
 		data.put("username", this.username);
 		data.put("headcount", Integer.toString(this.headCount));
 		data.put("nightscount:", Integer.toString(this.nightsCount));
@@ -141,6 +144,7 @@ public class RoomBookingImpl implements IRoomBooking{
 		data.put("checkoutdate", this.checkoutDate);
 		data.put("package", Integer.toString(this.packageNo));
 		System.out.println(data);
+		Activator.callCalculationService();
 		Activator.sub = true;
 		return data;
 	}
