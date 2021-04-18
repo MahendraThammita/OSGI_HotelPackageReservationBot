@@ -9,7 +9,7 @@ import java.util.Scanner;
 import org.osgi.framework.BundleActivator;
 import org.osgi.framework.BundleContext;
 import org.osgi.framework.ServiceReference;
-
+import user_handling_publisher.UserHandler;
 import com.sa.room_booking_publisher.IRoomBooking;
 
 import eventhall_booking_publisher.EventHallBook_Interface;
@@ -20,86 +20,13 @@ import eventhall_booking_publisher.EventHallBook_Interface;
 public class Activator implements BundleActivator {
 	
 ServiceReference serviceReference;
-URL location = Activator.class.getProtectionDomain().getCodeSource().getLocation();
+URL location = Activator.class.getProtectionDomain().getCodeSource().getLocation();	
 
-	
 private String username = "";
 
 public void setUsername(String name) {
 	this.username = name;
 }
-	
-public void Register() {
-	
-	System.out.println("Enter your Username : ");
-	Scanner sc = new Scanner(System.in);
-	String user = sc.next();
-	System.out.println("Enter Password");
-	String pass = sc.next();
-	
-	
-
-	 try {
-	      FileWriter myWriter = new FileWriter(location.getPath()+"\\src\\users.txt",true);
-	      BufferedWriter bufferedWriter = new BufferedWriter(myWriter);
-	      bufferedWriter.write( user + "," + pass + "\n");
-	      bufferedWriter.close();
-	      System.out.println("Successfully Registered. Please Login to proceed.");
-	      Login();
-	      
-	    } catch (IOException e) {
-	      System.out.println("An error occurred.");
-	      e.printStackTrace();
-	    }
-}
-
-
-public void Login() {
-	
-	boolean valid = false;
-	
-	String tempUser = "";
-	String tempPass = "";
-	
-	Scanner scanner = new Scanner(System.in);
-	System.out.println("Username : ");
-	String user = scanner.next();
-	System.out.println("Password :");
-	String pass = scanner.next();
-	
-
-	
-	try {
-		
-	Scanner	sc = new Scanner(new File(location.getPath()+"\\src\\users.txt"));
-	sc.useDelimiter("[,\n]");
-	
-	while(sc.hasNext() && !valid) {
-		
-		tempUser = sc.next();
-		tempPass = sc.next();
-		
-		if(tempUser.trim().equals(user.trim()) && tempPass.trim().equals(pass.trim())) {
-			
-			valid = true;
-			setUsername(tempUser);	
-		}
-		
-		else {
-			System.out.println("User Not Found!");
-			Login();
-		}
-	}
-		sc.close();
-			
-	} catch (Exception e) {
-			
-		System.out.println(e);
-	}	
-}
-	
-	
-	
 	
 
 
@@ -111,14 +38,21 @@ public void Login() {
 		Scanner sc = new Scanner(System.in);
 		int auth = sc.nextInt();
 		
+		serviceReference = context.getServiceReference(UserHandler.class.getName());
+		UserHandler userHandler = (UserHandler)context.getService(serviceReference);
+		
 		if(auth == 1) {
 			
-			Login();
+			setUsername(userHandler.Login());
 		}
 		
 		else if (auth == 2) {
 			
-			Register();
+
+	
+
+			userHandler.Register();
+			setUsername(userHandler.Login());
 		}
 		
 		
@@ -145,6 +79,7 @@ public void Login() {
 				serviceReference = context.getServiceReference(IRoomBooking.class.getName());
 				IRoomBooking iRoomBooking = (IRoomBooking)context.getService(serviceReference);
 				iRoomBooking.lifeCycleMethod(username);
+				
 			}
 			else if (option == 2) {
 				System.out.println("Event Hall Booking Selected");
@@ -160,8 +95,10 @@ public void Login() {
 			
 	}
 
-	public void stop(BundleContext bundleContext) throws Exception {
+	public void stop(BundleContext context) throws Exception {
 		
+		System.out.println("Subscriber Stopped");
+		context.ungetService(serviceReference);
 	}
 
 }

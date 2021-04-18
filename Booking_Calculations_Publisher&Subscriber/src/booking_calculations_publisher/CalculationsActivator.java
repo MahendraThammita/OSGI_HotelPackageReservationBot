@@ -17,10 +17,10 @@ public class CalculationsActivator implements BundleActivator {
 		//Room Services Registration
 		IRoomBookingCalculations RoomService = new RoomBookingCalculationsImpl();
 		roomBundleRegistration = context.registerService(IRoomBookingCalculations.class.getName(), RoomService, null);
-		
+//		
 		//Event Hall Services Registration
 		IEventHallBookingCalculations HallService = new EventHallBookingCalculationsImpl();
-		hallBundleRegistration = context.registerService(IRoomBookingCalculations.class.getName(), HallService, null);
+		hallBundleRegistration = context.registerService(IEventHallBookingCalculations.class.getName(), HallService, null);
 	}
 
 	public void stop(BundleContext context) throws Exception {

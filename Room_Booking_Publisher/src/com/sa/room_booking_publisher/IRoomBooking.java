@@ -34,8 +34,14 @@ public interface IRoomBooking {
 	//package details
 	public RoomBookingImpl packages();
 	
+	//getting the coupen code details
+	public RoomBookingImpl coupenDet();
+	
 	//exporting data to the calculations service
 	public HashMap<String, String> toCalculation();
+	
+	//display final bill and get confirmation
+	public void getConfirmation();
 	
 	
 }

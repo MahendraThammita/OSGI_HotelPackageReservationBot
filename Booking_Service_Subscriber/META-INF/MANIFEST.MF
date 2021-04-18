@@ -4,10 +4,10 @@ Bundle-Name: Booking_Service_Subscriber
 Bundle-SymbolicName: Booking_Service_Subscriber
 Bundle-Version: 1.0.0.qualifier
 Bundle-Activator: booking_service_subscriber.Activator
-Bundle-RequiredExecutionEnvironment: JavaSE-12,
- JavaSE-15
+Bundle-RequiredExecutionEnvironment: JavaSE-15
 Automatic-Module-Name: Booking.Service.Subscriber
 Import-Package: com.sa.room_booking_publisher,
  eventhall_booking_publisher,
- org.osgi.framework;version="1.3.0"
+ org.osgi.framework;version="1.3.0",
+ user_handling_publisher
 Bundle-ActivationPolicy: lazy
