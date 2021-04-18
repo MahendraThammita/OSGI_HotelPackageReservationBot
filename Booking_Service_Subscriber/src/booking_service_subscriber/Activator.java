@@ -20,9 +20,7 @@ import eventhall_booking_publisher.EventHallBook_Interface;
 public class Activator implements BundleActivator {
 	
 ServiceReference serviceReference;
-URL location = Activator.class.getProtectionDomain().getCodeSource().getLocation();
-
-	
+URL location = Activator.class.getProtectionDomain().getCodeSource().getLocation();	
 private String username = "";
 
 public void setUsername(String name) {
@@ -34,7 +32,7 @@ public void Register() {
 	System.out.println("Enter your Username : ");
 	Scanner sc = new Scanner(System.in);
 	String user = sc.next();
-	System.out.println("Enter Password");
+	System.out.println("Enter Password:");
 	String pass = sc.next();
 	
 	
@@ -81,16 +79,20 @@ public void Login() {
 		
 		if(tempUser.trim().equals(user.trim()) && tempPass.trim().equals(pass.trim())) {
 			
+			setUsername(tempUser);
 			valid = true;
-			setUsername(tempUser);	
+				
 		}
 		
-		else {
-			System.out.println("User Not Found!");
-			Login();
-		}
+		
 	}
 		sc.close();
+		
+		if (valid == false) {
+			
+			System.out.println("Invalid User");
+			Login();
+		}
 			
 	} catch (Exception e) {
 			
@@ -145,12 +147,13 @@ public void Login() {
 				serviceReference = context.getServiceReference(IRoomBooking.class.getName());
 				IRoomBooking iRoomBooking = (IRoomBooking)context.getService(serviceReference);
 				iRoomBooking.lifeCycleMethod(username);
+				
 			}
 			else if (option == 2) {
 				System.out.println("Event Hall Booking Selected");
-				serviceReference = context.getServiceReference(EventHallBook_Interface.class.getName());
-				EventHallBook_Interface eventHallBook_Interface = (EventHallBook_Interface)context.getService(serviceReference);
-				eventHallBook_Interface.lifeCycleMethod();
+//				serviceReference = context.getServiceReference(EventHallBook_Interface.class.getName());
+//				EventHallBook_Interface eventHallBook_Interface = (EventHallBook_Interface)context.getService(serviceReference);
+//				eventHallBook_Interface.lifeCycleMethod();
 			}
 			
 		}
@@ -160,8 +163,10 @@ public void Login() {
 			
 	}
 
-	public void stop(BundleContext bundleContext) throws Exception {
+	public void stop(BundleContext context) throws Exception {
 		
+		System.out.println("Subscriber Stopped");
+		context.ungetService(serviceReference);
 	}
 
 }
