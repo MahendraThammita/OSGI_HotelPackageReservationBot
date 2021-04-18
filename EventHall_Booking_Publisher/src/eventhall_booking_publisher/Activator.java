@@ -49,6 +49,9 @@ public class Activator implements BundleActivator {
 		
 	}
 	
+	
+	//sending the booking confirmation
+
 	public static String confirmHallBooking(){
 
 		System.out.println("Sending data to the Calculation service to confirm the booking!!!");
