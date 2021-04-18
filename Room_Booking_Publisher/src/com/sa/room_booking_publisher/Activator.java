@@ -18,14 +18,20 @@ public class Activator implements BundleActivator {
 		IRoomBooking publisherService = new RoomBookingImpl();
 		publishServiceRegistration = context.registerService(IRoomBooking.class.getName(), publisherService, null);
 		
-		while(sub) {
-			System.out.println("start subscribing calculation module");
-			serviceReference = context.getServiceReference(IRoomBookingCalculations.class.getName());
-			@SuppressWarnings("unchecked")
-			IRoomBookingCalculations iRoomBookingCalculations = (IRoomBookingCalculations) context.getService(serviceReference);
-			iRoomBookingCalculations.CalculateFinalBill(publisherService.toCalculation());
-			
-		}
+		System.out.println("start subscribing calculation module");
+		serviceReference = context.getServiceReference(IRoomBookingCalculations.class.getName());
+		@SuppressWarnings("unchecked")
+		IRoomBookingCalculations iRoomBookingCalculations = (IRoomBookingCalculations) context.getService(serviceReference);
+		iRoomBookingCalculations.CalculateFinalBill(publisherService.toCalculation());
+		
+//		while(Activator.sub) {
+//			System.out.println("start subscribing calculation module");
+//			serviceReference = context.getServiceReference(IRoomBookingCalculations.class.getName());
+//			@SuppressWarnings("unchecked")
+//			IRoomBookingCalculations iRoomBookingCalculations = (IRoomBookingCalculations) context.getService(serviceReference);
+//			iRoomBookingCalculations.CalculateFinalBill(publisherService.toCalculation());
+//			
+//		}
 		
 	}
 
