@@ -29,10 +29,7 @@ public void setUsername(String name) {
 }
 	
 
-<<<<<<< HEAD
-=======
-	
->>>>>>> 317e252f5a23af989c3b345982fd50da79ad7d5e
+
 	public void start(BundleContext context) throws Exception {
 		
 		
@@ -51,10 +48,9 @@ public void setUsername(String name) {
 		
 		else if (auth == 2) {
 			
-<<<<<<< HEAD
+
 	
-=======
->>>>>>> 317e252f5a23af989c3b345982fd50da79ad7d5e
+
 			userHandler.Register();
 			setUsername(userHandler.Login());
 		}
