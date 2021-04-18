@@ -108,7 +108,7 @@ public class RoomBookingCalculationsImpl implements IRoomBookingCalculations {
 			} catch (FileNotFoundException e) {
 				e.printStackTrace();
 			}
-		return 0;
+		return cDiscount;
 	}
 
 	@Override
