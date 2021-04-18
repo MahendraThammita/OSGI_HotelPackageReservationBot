@@ -1,2 +1,2 @@
-uditha,password
-akila,akila
+user,pass
+uj,pass
