@@ -13,25 +13,29 @@ public class EventHallBookingCalculationsImpl implements IEventHallBookingCalcul
 	
 	@Override
 	public HashMap<String, String> CalculateFinalBill_ForHall(HashMap<String, String> BookingInfo) {
-		String username = BookingInfo.get("username");
-		int headcount = Integer.parseInt(BookingInfo.get("headcount"));
-		int nightscount = Integer.parseInt(BookingInfo.get("nightscount"));
-		int childrencount = Integer.parseInt(BookingInfo.get("childrencount"));
-		LocalDate checkindate = LocalDate.parse(BookingInfo.get("checkindate") , converter);
-		LocalDate checkoutdate = LocalDate.parse(BookingInfo.get("checkoutdate") , converter);
-		int pack = Integer.parseInt(BookingInfo.get("package"));
-		double CouponDiscount = Double.parseDouble(BookingInfo.get("CouponDiscount") );
-		double regularDiscount = Double.parseDouble(BookingInfo.get("regularDiscount") );
-		double seasonalDiscount = Double.parseDouble(BookingInfo.get("seasonalDiscount") );
-		double totalDiscount = Double.parseDouble(BookingInfo.get("totalDiscount") );
-		double grossTotal = Double.parseDouble(BookingInfo.get("grossTotal") );
-		boolean Confirmation = Boolean.parseBoolean(BookingInfo.get("Confirmation") );
-		return null;
+		
+		String name = BookingInfo.get("name");
+		String email = BookingInfo.get("email");
+		int id = Integer.parseInt(BookingInfo.get("id"));
+		int headCount = Integer.parseInt(BookingInfo.get("headCount"));
+		int meal = Integer.parseInt(BookingInfo.get("meal"));
+		int functionType = Integer.parseInt(BookingInfo.get("functionType"));
+		LocalDate eventDate = LocalDate.parse(BookingInfo.get("eventDate") , converter);
+		
+		return BookingInfo;
 	}
 
 	@Override
-	public double GeneratePrice(int headCount, int meal) {
-		// TODO Auto-generated method stub
+	public double GeneratePrice(int headCount, int meal , int functionType) {
+		if(functionType == 1) {
+			
+		}
+		else if (functionType == 2) {
+			
+		}
+		else {
+			
+		}
 		return 0;
 	}
 
