@@ -18,7 +18,7 @@ import org.osgi.framework.FrameworkUtil;
 public class RoomBookingImpl implements IRoomBooking{
 	
 	//variables
-	private String username,checkinDate,checkoutDate;
+	private String username,checkinDate,checkoutDate,coupen;
 	private int headCount,nightsCount,childrenCount,packageNo;
 	Scanner scanner = new Scanner(System.in);  // Create a Scanner object
 	String dir = System.getProperty("user.dir");	//get the current working dir
@@ -116,13 +116,35 @@ public class RoomBookingImpl implements IRoomBooking{
 	    this.packageNo = scanner.nextInt();  // Read user input
 		return this;
 	}
+	
+	@Override
+	public RoomBookingImpl coupenDet() {
+		// TODO Auto-generated method stub
+		
+		System.out.print("Do ypu have any coupen codes available with you? (y/n) : ");
+	    this.coupen = scanner.next();  // Read user input
+	    while(true){
+	    	if(coupen.equals("y")) {
+		    	System.out.print("Please enter the coupen code : ");
+		    	this.coupen = scanner.next();
+		    	break;
+		    }else if(this.coupen.equals("n")) {
+		    	this.coupen = null;
+		    	break;
+		    }else {
+		    	System.out.println("Invalid input, please enter y/n : ");
+		    }
+	    }
+	    
+	    return this;
+	}
 
 	@Override
 	public void lifeCycleMethod(String username) {
 		// TODO Auto-generated method stub
 		//channing the methods
 		
-		RoomBookingImpl bookingImpl = new RoomBookingImpl(username).getUserName(username).packages().headCount().getNightCount().getChildrenCount();
+		RoomBookingImpl bookingImpl = new RoomBookingImpl(username).getUserName(username).packages().headCount().getNightCount().getChildrenCount().coupenDet();
 		bookingImpl.checkInDate();
 		bookingImpl.toCalculation();
 		
@@ -143,11 +165,13 @@ public class RoomBookingImpl implements IRoomBooking{
 		data.put("checkindate", this.checkinDate);
 		data.put("checkoutdate", this.checkoutDate);
 		data.put("package", Integer.toString(this.packageNo));
-		System.out.println(data);
+		data.put("coupen", this.coupen);
 		Activator.callCalculationService();
 		Activator.sub = true;
 		return data;
 	}
+
+
 
 
 }
