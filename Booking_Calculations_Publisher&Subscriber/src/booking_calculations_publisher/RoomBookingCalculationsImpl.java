@@ -23,67 +23,67 @@ public class RoomBookingCalculationsImpl implements IRoomBookingCalculations {
 	double DELUXE_UnitPrice = 6000.00;
 	double EXECUTIVE_UnitPrice = 10000.00;
 	URL workspace = RoomBookingCalculationsImpl.class.getProtectionDomain().getCodeSource().getLocation();
+	HashMap<String, String> confirmationMap = new HashMap<String, String>();
 	
-	DateTimeFormatter converter = DateTimeFormatter.ofPattern("dd-MM-YYYY");
+	DateTimeFormatter converter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
 	@Override
 	public HashMap<String, String> CalculateFinalBill(HashMap<String, String> BookingInfo) {
 		
-		System.out.println("akila " + BookingInfo);
+		try {
 
-		String username = BookingInfo.get("username");
-		int headcount = Integer.parseInt(BookingInfo.get("headcount"));
-		int nightscount = Integer.parseInt(BookingInfo.get("nightscount"));
-		int childrencount = Integer.parseInt(BookingInfo.get("childrencount"));
-		LocalDate checkindate = LocalDate.parse(BookingInfo.get("checkindate") , converter);
-		LocalDate checkoutdate = LocalDate.parse(BookingInfo.get("checkoutdate") , converter);
-		int pack = Integer.parseInt(BookingInfo.get("package"));
-		double netTotal = 0.00;
-		double CouponDiscount = 0.00 , regularDiscount , seasonalDiscount;
-		
-		switch (pack) {
-		case 1:
-			netTotal = (STANDARD_UnitPrice * headcount) + (STANDARD_UnitPrice * 0.40 * childrencount);
-			break;
-		case 2:
-			netTotal = (DELUXE_UnitPrice * headcount) + (DELUXE_UnitPrice * 0.40 * childrencount);
-			break;
-		case 3:
-			netTotal = (EXECUTIVE_UnitPrice * headcount) + (EXECUTIVE_UnitPrice * 0.40 * childrencount);
-			break;
-		default:
-			break;
+			String username = BookingInfo.get("username");
+			int headcount = Integer.parseInt(BookingInfo.get("headcount"));
+			int nightscount = Integer.parseInt(BookingInfo.get("nightscount"));
+			int childrencount = Integer.parseInt(BookingInfo.get("childrencount"));
+			LocalDate checkindate = LocalDate.parse(BookingInfo.get("checkindate") , converter);
+			LocalDate checkoutdate = LocalDate.parse(BookingInfo.get("checkoutdate") , converter);
+			int pack = Integer.parseInt(BookingInfo.get("package"));
+			double netTotal = 0.00;
+			double CouponDiscount = 0.00 , regularDiscount , seasonalDiscount;
+			
+			switch (pack) {
+			case 1:
+				netTotal = (STANDARD_UnitPrice * headcount) + (STANDARD_UnitPrice * 0.40 * childrencount);
+				break;
+			case 2:
+				netTotal = (DELUXE_UnitPrice * headcount) + (DELUXE_UnitPrice * 0.40 * childrencount);
+				break;
+			case 3:
+				netTotal = (EXECUTIVE_UnitPrice * headcount) + (EXECUTIVE_UnitPrice * 0.40 * childrencount);
+				break;
+			default:
+				break;
+			}
+			
+			if(BookingInfo.get("CouponNo") != null) {
+				CouponDiscount = CouponDiscount(BookingInfo.get("username") , netTotal , BookingInfo.get("CouponNo"));
+			}
+			
+			regularDiscount = RegularDiscount(pack, headcount, netTotal);
+			seasonalDiscount = SeasonalDiscount(pack, checkindate, netTotal);
+			
+			double totalDiscount = CouponDiscount + regularDiscount + seasonalDiscount;
+			double grossTotal = netTotal - totalDiscount;
+			
+			
+			confirmationMap.put("username", username);
+			confirmationMap.put("headcount", Integer.toString(headcount));
+			confirmationMap.put("nightscount", Integer.toString(nightscount));
+			confirmationMap.put("childrencount", Integer.toString(childrencount));
+			confirmationMap.put("checkindate", checkindate.format(converter));
+			confirmationMap.put("checkoutdate", checkoutdate.format(converter));
+			confirmationMap.put("package", Integer.toString(pack));
+			confirmationMap.put("CouponDiscount", Double.toString(CouponDiscount));
+			confirmationMap.put("regularDiscount", Double.toString(regularDiscount));
+			confirmationMap.put("seasonalDiscount", Double.toString(seasonalDiscount));
+			confirmationMap.put("totalDiscount", Double.toString(totalDiscount));
+			confirmationMap.put("grossTotal", Double.toString(grossTotal));
+		}catch(Exception ex) {
+			System.out.println(ex);
 		}
 		
-		if(BookingInfo.get("CouponNo") != null) {
-			CouponDiscount = CouponDiscount(BookingInfo.get("username") , netTotal , BookingInfo.get("CouponNo"));
-		}
-		
-		regularDiscount = RegularDiscount(pack, headcount, netTotal);
-		seasonalDiscount = SeasonalDiscount(pack, checkindate, netTotal);
-		
-		double totalDiscount = CouponDiscount + regularDiscount + seasonalDiscount;
-		double grossTotal = netTotal - totalDiscount;
-		
-		HashMap<String, String> confirmationMap = new HashMap<String, String>();
-		confirmationMap.put("username", username);
-		confirmationMap.put("headcount", Integer.toString(headcount));
-		confirmationMap.put("nightscount", Integer.toString(nightscount));
-		confirmationMap.put("childrencount", Integer.toString(childrencount));
-		confirmationMap.put("checkindate", checkindate.format(converter));
-		confirmationMap.put("checkoutdate", checkoutdate.format(converter));
-		confirmationMap.put("package", Integer.toString(pack));
-		confirmationMap.put("CouponDiscount", Double.toString(CouponDiscount));
-		confirmationMap.put("regularDiscount", Double.toString(regularDiscount));
-		confirmationMap.put("seasonalDiscount", Double.toString(seasonalDiscount));
-		confirmationMap.put("totalDiscount", Double.toString(totalDiscount));
-		confirmationMap.put("grossTotal", Double.toString(grossTotal));
-		
-<<<<<<< HEAD
-		
-		return BookingInfo;
-=======
+
 		return confirmationMap;
->>>>>>> 9cc0f7e681adf0041c61850e8c07cb83664d1531
 	}
 
 	@Override

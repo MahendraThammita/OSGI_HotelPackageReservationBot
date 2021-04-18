@@ -56,6 +56,7 @@ public class Activator implements BundleActivator {
 			serviceReference = contextNew.getServiceReference(IRoomBookingCalculations.class.getName());
 			IRoomBookingCalculations iRoomBookingCalculations = (IRoomBookingCalculations) contextNew.getService(serviceReference);
 			calData =  iRoomBookingCalculations.CalculateFinalBill(RoomBookingImpl.data);
+			System.out.println("final bill" + calData);
 		}catch(Exception ex) {
 			System.out.println(ex);
 		}

@@ -85,9 +85,9 @@ public class RoomBookingImpl implements IRoomBooking{
 	public RoomBookingImpl checkInDate() {
 		// TODO Auto-generated method stub
 		
-		System.out.print("Please enter the check in date (dd/MM/yyyy) : ");
+		System.out.print("Please enter the check in date (yyyy-MM-dd) : ");
 	    this.checkinDate = scanner.next();  // Read user input
-	    checkInDate = new SimpleDateFormat("dd/MM/yyyy");  
+	    checkInDate = new SimpleDateFormat("yyyy-MM-dd");  
 		return this;
 	}
 
@@ -179,14 +179,14 @@ public class RoomBookingImpl implements IRoomBooking{
 		
 		data.put("username", this.username);
 		data.put("headcount", Integer.toString(this.headCount));
-		data.put("nightscount:", Integer.toString(this.nightsCount));
-		data.put("childrencount:", Integer.toString(this.childrenCount));
+		data.put("nightscount", Integer.toString(this.nightsCount));
+		data.put("childrencount", Integer.toString(this.childrenCount));
 		data.put("checkindate", this.checkinDate);
 		data.put("checkoutdate", this.checkoutDate);
 		data.put("package", Integer.toString(this.packageNo));
-		data.put("coupen", this.coupen);
+		data.put("CouponNo", this.coupen);
 		finalBill = Activator.callCalculationService();
-		System.out.println(finalBill);
+		//System.out.println(finalBill);
 		Activator.sub = true;
 		return data;
 	}
