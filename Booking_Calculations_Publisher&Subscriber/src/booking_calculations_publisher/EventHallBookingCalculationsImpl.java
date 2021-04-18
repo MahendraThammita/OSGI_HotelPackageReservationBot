@@ -64,7 +64,7 @@ public class EventHallBookingCalculationsImpl implements IEventHallBookingCalcul
 
 	@Override
 	public String ConfirmHallBooking(HashMap<String, String> BookingInfo) {
-		// TODO Auto-generated method stub
+		
 		return null;
 	}
 
