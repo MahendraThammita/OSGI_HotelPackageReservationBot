@@ -50,10 +50,15 @@ public class Activator implements BundleActivator {
 	public static HashMap<String, String> callCalculationService(){
 
 		System.out.println("start subscribing calculation module");
-		serviceReference = contextNew.getServiceReference(IRoomBookingCalculations.class.getName());
-		@SuppressWarnings("unchecked")
-		IRoomBookingCalculations iRoomBookingCalculations = (IRoomBookingCalculations) contextNew.getService(serviceReference);
-		iRoomBookingCalculations.CalculateFinalBill(RoomBookingImpl.data);
+		try {
+			System.out.println(RoomBookingImpl.data);
+			serviceReference = contextNew.getServiceReference(IRoomBookingCalculations.class.getName());
+			@SuppressWarnings("unchecked")
+			IRoomBookingCalculations iRoomBookingCalculations = (IRoomBookingCalculations) contextNew.getService(serviceReference);
+			iRoomBookingCalculations.CalculateFinalBill(RoomBookingImpl.data);
+		}catch(Exception ex) {
+			System.out.println(ex);
+		}
 		return null;
 		
 	}
