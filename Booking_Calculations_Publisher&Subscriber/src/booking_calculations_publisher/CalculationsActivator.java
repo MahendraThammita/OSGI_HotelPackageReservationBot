@@ -5,16 +5,17 @@ import org.osgi.framework.BundleContext;
 import org.osgi.framework.ServiceReference;
 
 
+
 public class CalculationsActivator implements BundleActivator {
 
 	ServiceReference roomBundleReference;
 	ServiceReference hallBundleReference;
 
 	public void start(BundleContext context) throws Exception {
-		System.out.println("Start Subscriber Service");
-		//roomBundleReference = context.getServiceReference(ServicePublish.class.getName());
-		//ServicePublish servicePublish = (ServicePublish)context.getService(serviceReference);
-		//System.out.println(servicePublish.publishService());
+		System.out.println("Publisher Start");
+		roomBundleReference = context.getServiceReference(IRoomBookingCalculations.class.getName());
+		//roomBundleReference = context.getServiceReference(IRoomBookingCalculations.class.getName());
+		IRoomBookingCalculations RoomService = (IRoomBookingCalculations)context.getService(roomBundleReference);
 	}
 
 	public void stop(BundleContext context) throws Exception {
