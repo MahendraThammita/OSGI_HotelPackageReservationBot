@@ -1,12 +1,15 @@
 package booking_calculations_publisher;
 
-import java.io.BufferedReader;
+
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
+import java.net.URL;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.HashMap;
+import java.util.Scanner;
+
 
 
 
@@ -15,7 +18,7 @@ public class RoomBookingCalculationsImpl implements IRoomBookingCalculations {
 	double STANDARD_UnitPrice = 4000.00;
 	double DELUXE_UnitPrice = 6000.00;
 	double EXECUTIVE_UnitPrice = 10000.00;
-
+	URL workspace = RoomBookingCalculationsImpl.class.getProtectionDomain().getCodeSource().getLocation();
 	@Override
 	public HashMap<String, String> CalculateFinalBill(HashMap<String, String> BookingInfo) {
 
@@ -67,11 +70,23 @@ public class RoomBookingCalculationsImpl implements IRoomBookingCalculations {
 	@Override
 	public double CouponDiscount(String UserName , double netTotal , String CouponNo) {
 		
-			File coupons = new File("../coupons.txt");
+			double cDiscount = 0.00;
+			File coupons = new File(workspace.getPath() + "\\src\\coupons.txt");
 			try {
-				BufferedReader bufferedReader = new BufferedReader(new FileReader(coupons));
+				//BufferedReader bufferedReader = new BufferedReader(new FileReader(coupons));
+				Scanner sc = new Scanner(new FileReader(coupons));
+				while (sc.hasNextLine()) {
+					String couponNoString = sc.next();
+					String uNameString = sc.next();
+					if(couponNoString.equals(CouponNo) && uNameString.equals(UserName)) {
+						String disPerscent = sc.next();
+						cDiscount = netTotal * (Double.parseDouble(disPerscent) / 100);
+						break;
+					}
+					
+					sc.nextLine();
+				}
 			} catch (FileNotFoundException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 		return 0;
