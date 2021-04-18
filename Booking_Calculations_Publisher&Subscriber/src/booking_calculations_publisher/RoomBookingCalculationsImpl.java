@@ -30,7 +30,6 @@ public class RoomBookingCalculationsImpl implements IRoomBookingCalculations {
 	public HashMap<String, String> CalculateFinalBill(HashMap<String, String> BookingInfo) {
 		
 		try {
-
 			String username = BookingInfo.get("username");
 			int headcount = Integer.parseInt(BookingInfo.get("headcount"));
 			int nightscount = Integer.parseInt(BookingInfo.get("nightscount"));
