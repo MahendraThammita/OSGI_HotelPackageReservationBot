@@ -1,5 +1,6 @@
 package com.sa.room_booking_publisher;
 
+import booking_calculations_publisher.IRoomBookingCalculations;
 import org.osgi.framework.BundleActivator;
 import org.osgi.framework.BundleContext;
 import org.osgi.framework.ServiceReference;
@@ -17,12 +18,20 @@ public class Activator implements BundleActivator {
 		IRoomBooking publisherService = new RoomBookingImpl();
 		publishServiceRegistration = context.registerService(IRoomBooking.class.getName(), publisherService, null);
 		
-		while(sub) {
-			System.out.println("starting subscribing calculation module");
-//			serviceReference = context.getServiceReference(IRoomBooking.class.getName());
-//			IRoomBooking iRoomBooking = (IRoomBooking) context.getService(serviceReference);
-			
-		}
+		System.out.println("start subscribing calculation module");
+		serviceReference = context.getServiceReference(IRoomBookingCalculations.class.getName());
+		@SuppressWarnings("unchecked")
+		IRoomBookingCalculations iRoomBookingCalculations = (IRoomBookingCalculations) context.getService(serviceReference);
+		iRoomBookingCalculations.CalculateFinalBill(publisherService.toCalculation());
+		
+//		while(Activator.sub) {
+//			System.out.println("start subscribing calculation module");
+//			serviceReference = context.getServiceReference(IRoomBookingCalculations.class.getName());
+//			@SuppressWarnings("unchecked")
+//			IRoomBookingCalculations iRoomBookingCalculations = (IRoomBookingCalculations) context.getService(serviceReference);
+//			iRoomBookingCalculations.CalculateFinalBill(publisherService.toCalculation());
+//			
+//		}
 		
 	}
 
