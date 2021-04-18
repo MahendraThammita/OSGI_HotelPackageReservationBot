@@ -11,6 +11,7 @@ import java.net.URL;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.HashMap;
+import java.util.Map;
 import java.util.Scanner;
 
 
@@ -63,14 +64,26 @@ public class RoomBookingCalculationsImpl implements IRoomBookingCalculations {
 		double totalDiscount = CouponDiscount + regularDiscount + seasonalDiscount;
 		double grossTotal = netTotal - totalDiscount;
 		
-		BookingInfo.put("CouponDiscount", Double.toString(CouponDiscount));
-		BookingInfo.put("regularDiscount", Double.toString(regularDiscount));
-		BookingInfo.put("seasonalDiscount", Double.toString(seasonalDiscount));
-		BookingInfo.put("totalDiscount", Double.toString(totalDiscount));
-		BookingInfo.put("grossTotal", Double.toString(grossTotal));
+		HashMap<String, String> confirmationMap = new HashMap<String, String>();
+		confirmationMap.put("username", username);
+		confirmationMap.put("headcount", Integer.toString(headcount));
+		confirmationMap.put("nightscount", Integer.toString(nightscount));
+		confirmationMap.put("childrencount", Integer.toString(childrencount));
+		confirmationMap.put("checkindate", checkindate.format(converter));
+		confirmationMap.put("checkoutdate", checkoutdate.format(converter));
+		confirmationMap.put("package", Integer.toString(pack));
+		confirmationMap.put("CouponDiscount", Double.toString(CouponDiscount));
+		confirmationMap.put("regularDiscount", Double.toString(regularDiscount));
+		confirmationMap.put("seasonalDiscount", Double.toString(seasonalDiscount));
+		confirmationMap.put("totalDiscount", Double.toString(totalDiscount));
+		confirmationMap.put("grossTotal", Double.toString(grossTotal));
 		
+<<<<<<< HEAD
 		
 		return BookingInfo;
+=======
+		return confirmationMap;
+>>>>>>> 9cc0f7e681adf0041c61850e8c07cb83664d1531
 	}
 
 	@Override
