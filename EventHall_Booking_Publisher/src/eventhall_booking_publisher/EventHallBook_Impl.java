@@ -77,9 +77,9 @@ public class EventHallBook_Impl implements EventHallBook_Interface{
 	public EventHallBook_Impl getMeal() {
 		
 		System.out.println("Please select ur desired meal package =) ");
-		System.out.println("1.Package 1");
-		System.out.println("2.Package 2");
-		System.out.println("3.Package 3");
+		System.out.println("[1].Basic - Maximum headcount - 100");
+		System.out.println("[2].Standard - Maximum headcount - 200 | ");
+		System.out.println("[3].Package 3");
 		System.out.println("");
 		
 		System.out.print("Please enter the selected event number : ");
@@ -91,11 +91,11 @@ public class EventHallBook_Impl implements EventHallBook_Interface{
 	public String getToday() {
 		// TODO Auto-generated method stub
 		
-		DateTimeFormatter dtf = DateTimeFormatter.ofPattern("uuuu/MM/dd");
-	    LocalDate localDate = LocalDate.now();
-	    String currentDate = dtf.format(localDate);
+//		DateTimeFormatter dtf = DateTimeFormatter.ofPattern("uuuu/MM/dd");
+//	    LocalDate localDate = LocalDate.now();
+//	    String currentDate = dtf.format(localDate);
 		
-		return currentDate;
+		return null;
 	}
 
 	@Override
@@ -105,16 +105,6 @@ public class EventHallBook_Impl implements EventHallBook_Interface{
 //		String currentDate = getToday();
 		
 		return 0;
-	}
-
-	@Override
-	public void lifeCycleMethod() {
-		// TODO Auto-generated method stub
-
-		EventHallBook_Impl hallBook =  new EventHallBook_Impl().getName().getID().getEmail().getPhone().getEventDate().getHeadCount().getMeal();
-		hallBook.toCalculation();
-		
-		
 	}
 
 	
@@ -153,10 +143,21 @@ public class EventHallBook_Impl implements EventHallBook_Interface{
 		return this;
 	}
 	
+	@Override
+	public void lifeCycleMethod() {
+		// TODO Auto-generated method stub
+
+		EventHallBook_Impl hallBook =  new EventHallBook_Impl().getName().getID().getEmail().getPhone().getEventDate().getHeadCount().getMeal().getFunctionType();
+		hallBook.EventBookingCalculation();
+		hallBook.getEventConfirmation();
+		
+		
+	}
+	
 	
 
 	@Override
-	public void getConfirmation() {
+	public void getEventConfirmation() {
 		// TODO Auto-generated method stub
 		
 		System.out.println("\n");
@@ -174,7 +175,7 @@ public class EventHallBook_Impl implements EventHallBook_Interface{
 		System.out.println("Final Amount\t: "+bill.get("FinalAmmount"));
 		
 		
-		System.out.print("Do you want to proceed with the booking? (y/n) : ");
+		System.out.print("Do you want to proceed with this reservation? (y/n) : ");
 		confirmationMsg = sc.next();
 		
 		while(true) {
@@ -190,13 +191,13 @@ public class EventHallBook_Impl implements EventHallBook_Interface{
 			}
 		}
 		
-		System.out.println(Activator.confirmHallBooking() + "Thank you for using Room Booking Service =) ");
+		System.out.println(Activator.confirmHallBooking() + "Thank you for using Event Hall Booking Service!");
 		
 	}
 	
 	
 	@Override
-	public HashMap<String, String> toCalculation() {
+	public HashMap<String, String> EventBookingCalculation() {
 		// TODO Auto-generated method stub
 		
 		
@@ -208,6 +209,8 @@ public class EventHallBook_Impl implements EventHallBook_Interface{
 		hallBookingData.put("headCount", Integer.toString(this.headCount));
 		hallBookingData.put("meal", Integer.toString(this.meal));
 		hallBookingData.put("functionType", Integer.toString(this.functionType));
+		bill = Activator.callEventHallCalculation();
+		Activator.confirmStatus = true;
 		
 		return hallBookingData;
 		

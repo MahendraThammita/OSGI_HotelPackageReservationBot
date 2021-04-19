@@ -28,8 +28,8 @@ public interface EventHallBook_Interface {
 	
 	public void lifeCycleMethod();
 	
-	public void getConfirmation();
+	public void getEventConfirmation();
 	
-	public HashMap<String, String> toCalculation();
+	public HashMap<String, String> EventBookingCalculation();
 	
 }

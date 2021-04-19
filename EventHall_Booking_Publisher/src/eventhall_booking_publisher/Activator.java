@@ -35,13 +35,13 @@ public class Activator implements BundleActivator {
 	}
 	
 	
-	public static HashMap<String, String> callCalculationService(){
+	public static HashMap<String, String> callEventHallCalculation(){
 
 		System.out.println("start subscribing calculation module");
 		try {
 			serviceReference = contextNew.getServiceReference(IEventHallBookingCalculations.class.getName());
-			IEventHallBookingCalculations iRoomBookingCalculations = (IEventHallBookingCalculations) contextNew.getService(serviceReference);
-			calculatedData =  iRoomBookingCalculations.CalculateFinalBill_ForHall(EventHallBook_Impl.hallBookingData);
+			IEventHallBookingCalculations ihallBookingCalculations = (IEventHallBookingCalculations) contextNew.getService(serviceReference);
+			calculatedData =  ihallBookingCalculations.CalculateFinalBill_ForHall(EventHallBook_Impl.hallBookingData);
 		}catch(Exception ex) {
 			System.out.println(ex);
 		}
