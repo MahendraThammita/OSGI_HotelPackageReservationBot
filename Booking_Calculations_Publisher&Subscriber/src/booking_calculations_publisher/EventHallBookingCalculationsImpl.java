@@ -30,7 +30,7 @@ public class EventHallBookingCalculationsImpl implements IEventHallBookingCalcul
 
 	URL workspace = RoomBookingCalculationsImpl.class.getProtectionDomain().getCodeSource().getLocation();
 	
-	DateTimeFormatter converter = DateTimeFormatter.ofPattern("dd-MM-YYYY");
+	DateTimeFormatter converter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
 	
 	@Override
 	public HashMap<String, String> CalculateFinalBill_ForHall(HashMap<String, String> BookingInfo) {
@@ -43,6 +43,9 @@ public class EventHallBookingCalculationsImpl implements IEventHallBookingCalcul
 		int headCount = Integer.parseInt(BookingInfo.get("headCount"));
 		int meal = Integer.parseInt(BookingInfo.get("meal"));
 		int functionType = Integer.parseInt(BookingInfo.get("functionType"));
+		
+		//System.out.print(functionType);
+		
 		LocalDate eventDate = LocalDate.parse(BookingInfo.get("eventDate") , converter);
 		
 		packagePrice = functionPrices.get(functionType);

@@ -60,7 +60,7 @@ public class EventHallBook_Impl implements EventHallBook_Interface{
 	@Override
 	public EventHallBook_Impl getEventDate() {
 		// TODO Auto-generated method stub
-		System.out.print("Enter the date of your function: ");  
+		System.out.print("Enter the date of your function (YYYY-MM-DD): ");  
 		eventDate = sc.next();
 		return this;
 	}
