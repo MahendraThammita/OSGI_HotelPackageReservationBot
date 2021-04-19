@@ -180,7 +180,7 @@ public class RoomBookingCalculationsImpl implements IRoomBookingCalculations {
 			
 		}
 		else
-			return "Error in Saving Booking.";
+			return "Reservation Rejected";
 	}
 
 	

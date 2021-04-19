@@ -97,7 +97,7 @@ public class EventHallBookingCalculationsImpl implements IEventHallBookingCalcul
 			
 		}
 		else
-			return "Error in Saving Booking.";
+			return "Reservation Rejected";
 	}
 
 	@Override
