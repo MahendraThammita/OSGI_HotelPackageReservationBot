@@ -144,7 +144,7 @@ public class EventHallBook_Impl implements EventHallBook_Interface{
 	}
 	
 	@Override
-	public void lifeCycleMethod() {
+	public void callFunctions() {
 		// TODO Auto-generated method stub
 
 		EventHallBook_Impl hallBook =  new EventHallBook_Impl().getName().getID().getEmail().getPhone().getEventDate().getHeadCount().getMeal().getFunctionType();

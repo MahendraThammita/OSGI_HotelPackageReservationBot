@@ -26,7 +26,7 @@ public interface EventHallBook_Interface {
 	
 	public double Discount();
 	
-	public void lifeCycleMethod();
+	public void callFunctions();
 	
 	public void getEventConfirmation();
 	

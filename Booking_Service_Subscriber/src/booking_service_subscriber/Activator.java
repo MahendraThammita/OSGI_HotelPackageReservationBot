@@ -85,7 +85,7 @@ public void setUsername(String name) {
 				System.out.println("Event Hall Booking Selected");
 				serviceReference = context.getServiceReference(EventHallBook_Interface.class.getName());
 				EventHallBook_Interface eventHallBook_Interface = (EventHallBook_Interface)context.getService(serviceReference);
-				eventHallBook_Interface.lifeCycleMethod();
+				eventHallBook_Interface.callFunctions();
 			}
 			
 		}
