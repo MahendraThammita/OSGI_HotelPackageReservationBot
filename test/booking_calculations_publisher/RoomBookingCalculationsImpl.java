@@ -89,7 +89,7 @@ public class RoomBookingCalculationsImpl implements IRoomBookingCalculations {
 	public double CouponDiscount(String UserName , double netTotal , String CouponNo) {
 		
 			double cDiscount = 0.00;
-			File coupons = new File("C:\\osgi\\bookingManagement\\coupons.txt");
+			File coupons = new File(workspace.getPath() + "\\src\\coupons.txt");
 			try {
 				//BufferedReader bufferedReader = new BufferedReader(new FileReader(coupons));
 				Scanner sc = new Scanner(new FileReader(coupons));
@@ -168,7 +168,7 @@ public class RoomBookingCalculationsImpl implements IRoomBookingCalculations {
 		boolean Confirmation = Boolean.parseBoolean(BookingInfo.get("Confirmation") );
 		if(Confirmation) {
 			try {
-				FileWriter bookingWriter = new FileWriter("C:\\osgi\\bookingManagement\\RoomBookings.txt" , true);
+				FileWriter bookingWriter = new FileWriter(workspace.getPath() + "\\src\\RoomBookings.txt" , true);
 				BufferedWriter bufferedWriter = new BufferedWriter(bookingWriter);
 				bufferedWriter.write(username + "\t" + pack + "\t" + headcount + "\t" + nightscount + "\t" + childrencount + "\t" + checkindate + "\t" + checkoutdate + "\t" + CouponDiscount+ "\t" + regularDiscount+ "\t" + seasonalDiscount+ "\t" + totalDiscount+ "\t" + grossTotal + "\n");
 				bufferedWriter.close();
@@ -180,7 +180,7 @@ public class RoomBookingCalculationsImpl implements IRoomBookingCalculations {
 			
 		}
 		else
-			return "Reservation Rejected";
+			return "Error in Saving Booking.";
 	}
 
 	
