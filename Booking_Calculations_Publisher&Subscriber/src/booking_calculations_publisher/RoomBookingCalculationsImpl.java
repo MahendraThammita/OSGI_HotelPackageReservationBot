@@ -102,7 +102,7 @@ public class RoomBookingCalculationsImpl implements IRoomBookingCalculations {
 			} catch (FileNotFoundException e) {
 				e.printStackTrace();
 			}
-		return 0;
+		return cDiscount;
 	}
 
 	@Override
@@ -175,7 +175,7 @@ public class RoomBookingCalculationsImpl implements IRoomBookingCalculations {
 			
 		}
 		else
-			return "Error in Saving Booking.";
+			return "Reservation Rejected";
 	}
 
 	
