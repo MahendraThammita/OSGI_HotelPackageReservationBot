@@ -76,12 +76,14 @@ public class EventHallBook_Impl implements EventHallBook_Interface{
 	@Override
 	public EventHallBook_Impl getMeal() {
 		
+		//select the meal package
 		System.out.println("Please select ur desired meal package =) ");
 		System.out.println("[1].Basic - Maximum headcount - 100");
 		System.out.println("[2].Standard - Maximum headcount - 200 | ");
 		System.out.println("[3].Package 3");
 		System.out.println("");
 		
+		//gain the input of meal
 		System.out.print("Please enter the selected event number : ");
 		meal = sc.nextInt();
 		return this;
@@ -111,7 +113,7 @@ public class EventHallBook_Impl implements EventHallBook_Interface{
 
 	@Override
 	public EventHallBook_Impl getFunctionType() {
-		
+		//display all the event packages
 		System.out.println("Please select ur Event type =) ");
 		System.out.println("1.Party");
 		System.out.println("\t + Lunch or Dinner");
@@ -147,6 +149,7 @@ public class EventHallBook_Impl implements EventHallBook_Interface{
 	public void callFunctions() {
 		// TODO Auto-generated method stub
 
+		//making a lifecycle method to call all the functions
 		EventHallBook_Impl hallBook =  new EventHallBook_Impl().getName().getID().getEmail().getPhone().getEventDate().getHeadCount().getMeal().getFunctionType();
 		hallBook.EventBookingCalculation();
 		hallBook.getEventConfirmation();
@@ -160,6 +163,8 @@ public class EventHallBook_Impl implements EventHallBook_Interface{
 	public void getEventConfirmation() {
 		// TODO Auto-generated method stub
 		
+		
+		//Printing the final bill
 		System.out.println("\n");
 		System.out.println("---------- Your Final bill summary---------\n");
 		
@@ -175,6 +180,7 @@ public class EventHallBook_Impl implements EventHallBook_Interface{
 		System.out.println("Final Amount\t: "+bill.get("FinalAmmount"));
 		
 		
+		//getting the bill confirmation
 		System.out.print("Do you want to proceed with this reservation? (y/n) : ");
 		confirmationMsg = sc.next();
 		
@@ -200,7 +206,7 @@ public class EventHallBook_Impl implements EventHallBook_Interface{
 	public HashMap<String, String> EventBookingCalculation() {
 		// TODO Auto-generated method stub
 		
-		
+		//passing the input scans
 		hallBookingData.put("name", this.name);
 		hallBookingData.put("id", Integer.toString(this.idNum));
 		hallBookingData.put("email:", this.email);
