@@ -85,7 +85,7 @@ public class EventHallBookingCalculationsImpl implements IEventHallBookingCalcul
 		
 		if(Confirmation) {
 			try {
-				FileWriter bookingWriter = new FileWriter("C:\\osgi\\bookingManagement\\EventBookings.txt" , true);
+				FileWriter bookingWriter = new FileWriter(workspace.getPath() + "\\src\\EventBookings.txt" , true);
 				BufferedWriter bufferedWriter = new BufferedWriter(bookingWriter);
 				bufferedWriter.write(username + "\t" + id + "\t" + headcount + "\t" + meal + "\t" + functionType + "\t" + eventDate + "\t" + totalPrice + "\t" + regularDiscount+ "\t" + seasonalDiscount+ "\t" + Totaldiscount + "\t" + FinalAmmount+ "\n");
 				bufferedWriter.close();

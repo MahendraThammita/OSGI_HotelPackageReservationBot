@@ -26,7 +26,7 @@ public class UserHandleraImpl implements UserHandler {
 		
 
 		 try {
-		      FileWriter myWriter = new FileWriter(location.getPath()+"\\src\\users.txt",true);
+		      FileWriter myWriter = new FileWriter("C:\\osgi\\userManagement\\users.txt",true);
 		      BufferedWriter bufferedWriter = new BufferedWriter(myWriter);
 		      bufferedWriter.write( user + "," + pass + "\n");
 		      bufferedWriter.close();
@@ -59,7 +59,7 @@ public class UserHandleraImpl implements UserHandler {
 		
 		try {
 			
-		Scanner	sc = new Scanner(new File(location.getPath()+"\\src\\users.txt"));
+		Scanner	sc = new Scanner(new File("C:\\osgi\\userManagement\\users.txt"));
 		sc.useDelimiter("[,\n]");
 		
 		while(sc.hasNext() && !valid) {
