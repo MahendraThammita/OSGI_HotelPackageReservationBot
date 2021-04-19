@@ -1,1 +1,4 @@
-123a	akila	20
+C0001	mahen	20
+C0002	akila	25
+C0003	uditha	50
+C0004	nethsara	30
